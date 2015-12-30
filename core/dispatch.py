@@ -2,6 +2,8 @@
 According the message id,this function will dispatch each to
 it destination!
 """
+from utils.tools import is_subpackage
+from utils.tools import is_encryption
 
 
 class Split:

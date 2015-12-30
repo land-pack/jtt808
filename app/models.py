@@ -19,8 +19,8 @@ class Cookie(Base):
     quantify = Column(Integer())
     unit_cost = Column(Numeric(12, 2))
 
-class Register(Base):
-    __tablename__ = 'register'
+##class Register(Base):
+##    __tablename__ = 'register'
 
 
 
