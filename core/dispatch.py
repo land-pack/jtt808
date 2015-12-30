@@ -18,37 +18,46 @@ class Split:
 
         self.message_head_content = val[1:-2]
         self.crc = val[-2]  # The crc encryption from terminal!
+        self.debug=True
         if is_complete(self.message_head_content, self.crc):
-            # TODO keep next step
             self.tag = val[0:1]
             self.msg_id = val[1:3]
             self.msg_attr = val[3:5]
             self.dev_id = val[5:11]
             self.msg_product = val[11:13]
+            self.end_tag = val[-1:]
+            # check if subpackage
             if is_subpackage(self.msg_attr):
                 self.package_item = val[13:15]
                 self.content = val[15:-2]
             else:
                 # No message package item optional
                 self.content = val[13:-2]
+                # check if use CRC (Cyclic Redundancy Check)
+                if is_encryption(self.msg_attr):
+                    # TODO something for deciphering
+                    pass
 
-            self.end_tag = val[-1:]
+
         else:
 
             # ignore this request from terminal device
-            pass
+            self.debug=False
 
     def show(self):
-        print 'self.tag         :', self.tag
-        print 'self.msg_id      :', self.msg_id
-        print 'self.msg_attr    :', self.msg_attr
-        print 'self.dev_id      :', self.dev_id
-        print 'self.content     :', self.content
-        print 'self.crc         :', self.crc
-        print 'self.end_tag     :', self.end_tag
+        if self.debug:
+            print 'self.tag         :', self.tag
+            print 'self.msg_id      :', self.msg_id
+            print 'self.msg_attr    :', self.msg_attr
+            print 'self.dev_id      :', self.dev_id
+            print 'self.content     :', self.content
+            print 'self.crc         :', self.crc
+            print 'self.end_tag     :', self.end_tag
+        else:
+            print 'There are no assign bacuase the crc have no right!'
 
 
 if __name__ == '__main__':
-    sample = (126, 1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 43, 126)
+    sample = (126, 1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 45, 126)
     result = Split(sample)
     result.show()

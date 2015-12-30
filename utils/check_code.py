@@ -8,6 +8,5 @@ def check(a_tuple):
             flag = False
         else:
             check_code = check_code ^ each
-    print check_code
     return check_code
 
