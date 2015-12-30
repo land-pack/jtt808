@@ -12,6 +12,13 @@ def pattern(*val):
     return temp
 
 
+def reflect(val):
+    """
+    :param val: a message id , and this function will try to response it!
+    :return:
+    """
+    pass
+
 if __name__ == '__main__':
     urlpatterns = pattern(
             ('register', 123),
