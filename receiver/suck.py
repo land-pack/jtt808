@@ -1,11 +1,12 @@
 import socket
 import sys
+from dispatch_sample import dispatch_sample
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the part
-server_address = ('192.168.0.76', 8888)
+server_address = ('192.168.0.76', 8889)
 print >> sys.stderr, 'starting up on %s port %s' % server_address
 sock.bind(server_address)
 
@@ -14,8 +15,6 @@ sock.bind(server_address)
 flag = 1
 # Listen for incoming connection
 sock.listen(1)
-
-
 
 while True:
     # Wait for a connection
@@ -27,7 +26,7 @@ while True:
         while True:
             data = connection.recv(1024)
             if data:
-                print data
+                dispatch_sample(data.strip('\n'), connection)
 
             else:
                 print >> sys.stderr, 'no more data from', client_address

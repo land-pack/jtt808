@@ -21,12 +21,13 @@ def render(request, template):
             if request[item]:
                 for k in request[item]:
                     temp.append(k)
-    temp.append(request['crc'])     #Auto loader the crc for value
+    temp.append(request['crc'][0])  # Auto loader the old CRC for value
     check_code = check(temp)
-    temp[-1] = check_code
+    temp[-1] = check_code       # change to a new CRC
     temp.insert(0, 126)
     temp.append(126)
-    return tuple(temp)
+    return tuple(temp)          # will got a tuple for response ...
+
 
 def render_to_tuple(request):
     pass

@@ -5,7 +5,18 @@ it destination!
 from utils.tools import is_subpackage
 from utils.tools import is_encryption
 from utils.tools import is_complete
-from conf.protocols import JTT808
+from conf.protocols import MSG_ID
+from app.urls import urlpatterns
+import tongue
+
+"""
+urlpatterns is a function Dicts,and it will automatic looking
+for the target function according your flag is !
+"""
+
+
+def reflect(flag, request, conn):
+    urlpatterns[flag](request, conn)
 
 
 class Split:
@@ -62,19 +73,34 @@ class Dispatch:
     message id mean! you should ask the protocol!
     """
 
-    def __init__(self, protocol=JTT808):
+    def __init__(self, request, conn, protocol=MSG_ID):
         self.protocol = protocol
+        self.request = request
+        self.conn = conn
+        self.request_data = None
+        self.rec_data = None
+        self.flag = None
+        self.resolution()
+        self.distribute()
 
-    def distribute(self, msg_id):
+    def resolution(self):
+        self.request_data = tongue.Decode(self.request)
+        self.rec_data = Split(self.request_data)
+        self.flag = str(self.rec_data['msg_id'])
+
+    def distribute(self):
         """
 
-        :param msg_id: is a Dicts and system will ask if exists!
+        :param : self.flag is a key of protocol Dicts!
+        :param : self.conn is socket file desc
         :return:
         """
-        if msg_id in self.protocol:
-            pass
+        if self.flag in self.protocol:
+            reflect(self.flag, self.rec_data, self.conn)
+
 
 if __name__ == '__main__':
-    sample = (126, 1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 43, 126)
-    result = Split(sample)
-    result.show()
+    # sample = (126, 1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 43, 126)
+    # result = Split(sample)
+    # result.show()
+    pass
