@@ -1,6 +1,3 @@
-from app.urls import urlpatterns
-
-
 def pattern(*val):
     """
     :param val: a tuple-inline a tuple from the apps-urls.py

@@ -34,6 +34,4 @@ MSG_ID = dns_key(MSG_ID_ORIGINAL)
 if __name__ == '__main__':
 
     for item in MSG_ID:
-        print 'Request is   :%s -- Response is  :%s' % (item,MSG_ID[item])
-
-
+        print 'Request is   :%s -- Response is  :%s' % (item, MSG_ID[item])

@@ -6,17 +6,18 @@ from utils.tools import is_subpackage
 from utils.tools import is_encryption
 from utils.tools import is_complete
 from conf.protocols import MSG_ID
+from conf.menu import REQ_RSP
 from app.urls import urlpatterns
 import tongue
 
 """
 urlpatterns is a function Dicts,and it will automatic looking
-for the target function according your flag is !
+for the target function according your menu_key is !
 """
 
 
-def reflect(flag, request, conn):
-    urlpatterns[flag](request, conn)
+def reflect(flag, request):
+    urlpatterns[flag](request)
 
 
 class Split:
@@ -73,20 +74,24 @@ class Dispatch:
     message id mean! you should ask the protocol!
     """
 
-    def __init__(self, request, conn, protocol=MSG_ID):
+    def __init__(self, request, conn, menu=REQ_RSP, protocol=MSG_ID):
         self.protocol = protocol
         self.request = request
         self.conn = conn
         self.request_data = None
         self.rec_data = None
-        self.flag = None
+        self.msg_key = None
+        self.menu = menu
+        self.menu_key = None  # Just a key of urlpatterns Dicts
         self.resolution()
-        self.distribute()
+        self.middle = self.distribute()
+        self.show()
+
 
     def resolution(self):
         self.request_data = tongue.Decode(self.request)
         self.rec_data = Split(self.request_data)
-        self.flag = str(self.rec_data['msg_id'])
+        self.menu_key = str(self.rec_data['msg_id'])
 
     def distribute(self):
         """
@@ -95,12 +100,25 @@ class Dispatch:
         :param : self.conn is socket file desc
         :return:
         """
-        if self.flag in self.protocol:
-            reflect(self.flag, self.rec_data, self.conn)
 
+        # self.msg_key like '(1,2)' so, it's tuple-like
+
+        if self.msg_key in self.protocol:
+            self.menu_key = self.protocol[self.msg_key]
+        # If you got the menu_key ,and you can check
+        # which response will should call! so check the self.menu
+        if self.menu_key in self.menu:
+            return reflect(self.menu_key, self.rec_data)
+
+        else:
+            return None
+
+    def show(self):
+        print 'self.middle      :',self.middle
 
 if __name__ == '__main__':
     # sample = (126, 1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 43, 126)
     # result = Split(sample)
     # result.show()
     pass
+
