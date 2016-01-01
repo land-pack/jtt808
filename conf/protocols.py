@@ -2,13 +2,8 @@
 0x
 """
 from core.urls import pattern
-from core.dns import dns
 from core.dns import dns_key
 
-JTT808 = pattern(
-        ('register', 0x8100),
-        ('unregister', 0x8200)
-)
 """
 ser     : server
 ter     : terminal

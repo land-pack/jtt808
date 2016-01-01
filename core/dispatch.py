@@ -6,7 +6,6 @@ from utils.tools import is_subpackage
 from utils.tools import is_encryption
 from utils.tools import is_complete
 from conf.protocols import MSG_ID
-from conf.menu import REQ_RSP
 from app.urls import urlpatterns
 import tongue
 
@@ -74,14 +73,13 @@ class Dispatch:
     message id mean! you should ask the protocol!
     """
 
-    def __init__(self, request, conn, menu=REQ_RSP, protocol=MSG_ID):
+    def __init__(self, request, conn, protocol=MSG_ID):
         self.protocol = protocol
         self.request = request
         self.conn = conn
         self.request_data = None
         self.rec_data = None
         self.msg_key = None
-        self.menu = menu
         self.menu_key = None  # Just a key of urlpatterns Dicts
         self.resolution()
         self.middle = self.distribute()
@@ -117,11 +115,7 @@ class Dispatch:
 
         if self.msg_key in self.protocol:
             self.menu_key = self.protocol[self.msg_key]
-        # If you got the menu_key ,and you can check
-        # which response will should call! so check the self.menu
-        if self.menu_key in self.menu:
-            temp = self.menu[self.menu_key]
-            return reflect(temp, self.rec_data)
+            return reflect(self.menu_key, self.rec_data)
 
         else:
             return None
