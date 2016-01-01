@@ -113,13 +113,15 @@ class Dispatch:
         """
 
         # self.msg_key like '(1,2)' so, it's tuple-like
+        # and then,you self.menu_key will set 'ter_aut_req'
 
         if self.msg_key in self.protocol:
             self.menu_key = self.protocol[self.msg_key]
         # If you got the menu_key ,and you can check
         # which response will should call! so check the self.menu
         if self.menu_key in self.menu:
-            return reflect(self.menu_key, self.rec_data)
+            temp = self.menu[self.menu_key]
+            return reflect(temp, self.rec_data)
 
         else:
             return None
