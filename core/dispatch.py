@@ -85,7 +85,7 @@ class Dispatch:
         self.menu_key = None  # Just a key of urlpatterns Dicts
         self.resolution()
         self.middle = self.distribute()
-        self.show()
+        # self.show()
 
     def resolution(self):
         """

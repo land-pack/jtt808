@@ -17,6 +17,10 @@ def auth(request):
     return render(request, template)
 
 
+def hello(request):
+    print 'hey ! here you go'
+
+
 if __name__ == '__main__':
     """
     The below sample dicts just for test the register!
