@@ -7,7 +7,7 @@ and then,you can call 'view.register' by nickname 'register'
 """
 urlpatterns = pattern(
         ('ser_reg_rsp', views.register),
-        ('ser_aut_rsp', views.auth),
+        ('ter_aut_rep', views.auth),
 )
 
 if __name__ == '__main__':

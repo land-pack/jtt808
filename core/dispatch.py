@@ -96,8 +96,8 @@ class Dispatch:
         :return: None
         """
         self.request_data = tongue.Decode(self.request)
-        self.rec_data = Split(self.request_data)
-        self.msg_key = str(self.rec_data['msg_id'])
+        self.rec_data = Split(self.request_data.dst)  # Don't forget get dst attrbute
+        self.msg_key = str(self.rec_data.msg_id)
 
     def distribute(self):
         """

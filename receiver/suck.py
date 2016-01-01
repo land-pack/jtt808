@@ -1,5 +1,6 @@
 import socket
 import sys
+sys.path.append("..")
 # from dispatch_sample import dispatch_sample
 from core.dispatch import Dispatch
 
