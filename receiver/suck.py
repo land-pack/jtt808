@@ -8,7 +8,7 @@ from core.dispatch import Dispatch
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the part
-server_address = ('192.168.0.76', 5555)
+server_address = ('0.0.0.0', 5555)
 print >> sys.stderr, 'starting up on %s port %s' % server_address
 sock.bind(server_address)
 

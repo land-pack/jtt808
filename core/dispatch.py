@@ -16,6 +16,13 @@ for the target function according your menu_key is !
 
 
 def reflect(flag, request):
+    """
+    By checking the flag of urlpatterns Dicts,and then
+    reflect will do something for next!
+    :param flag:
+    :param request:
+    :return: a data for send to terminal!
+    """
     return urlpatterns[flag](request)
 
 
@@ -125,7 +132,7 @@ class Dispatch:
 
 
 if __name__ == '__main__':
-    # sample = (126, 1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 43, 126)
-    # result = Split(sample)
-    # result.show()
-    pass
+    # Test the Split class
+    sample1 = (126, 1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 43, 126)
+    result = Split(sample1)
+    result.show()

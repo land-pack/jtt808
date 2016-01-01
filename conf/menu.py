@@ -1,5 +1,5 @@
 """
-TODO something ...
+It's no use for now!
 """
 from core.urls import pattern
 

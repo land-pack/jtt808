@@ -1,5 +1,6 @@
 """
-0x
+0x8100 Poor readability,so we need to give a name
+to it.how about 'ter_reg_req' as it nickname!
 """
 from core.urls import pattern
 from core.dns import dns_key
@@ -22,7 +23,8 @@ MSG_ID_ORIGINAL = pattern(
 )
 """
 change the MSG_ID_ORIGINAL Dicts key
-example: 0x0100 --> (1,0)
+example1: 0x0100 --> (1,0)
+example2: 0100 --> (1,2)
 """
 MSG_ID = dns_key(MSG_ID_ORIGINAL)
 
