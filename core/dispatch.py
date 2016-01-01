@@ -17,7 +17,7 @@ for the target function according your menu_key is !
 
 
 def reflect(flag, request):
-    urlpatterns[flag](request)
+    return urlpatterns[flag](request)
 
 
 class Split:
@@ -87,15 +87,26 @@ class Dispatch:
         self.middle = self.distribute()
         self.show()
 
-
     def resolution(self):
+        """
+        step1: Decode the binary data to a tuple
+        step2: Split each element by the JTT808 protocol
+        step3: Recognize the message id ,and then checking Dicts!
+        something like {'(1,0)':'ter_reg_req'}
+        :return: None
+        """
         self.request_data = tongue.Decode(self.request)
         self.rec_data = Split(self.request_data)
-        self.menu_key = str(self.rec_data['msg_id'])
+        self.msg_key = str(self.rec_data['msg_id'])
 
     def distribute(self):
         """
-
+        step1: checking if we have a key call self.msg_key
+        step2: set a value to self.menu_key
+        something maybe like self.menu_key='ter_reg_req'
+        step3: if you have the key call 'ter_req_req'
+        we need to keep ask which function can be available!
+        step4: so,we need to ask the reflect function !
         :param : self.flag is a key of protocol Dicts!
         :param : self.conn is socket file desc
         :return:
@@ -114,11 +125,11 @@ class Dispatch:
             return None
 
     def show(self):
-        print 'self.middle      :',self.middle
+        print 'self.middle      :', self.middle
+
 
 if __name__ == '__main__':
     # sample = (126, 1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 43, 126)
     # result = Split(sample)
     # result.show()
     pass
-

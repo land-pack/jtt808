@@ -5,6 +5,8 @@ from core.urls import pattern
 
 """
 This is a Request - Response Dicts
+Why need those middle ware?
+because, sometime we have many-to-many relationship!
 ser     : server
 ter     : terminal
 req     : request
