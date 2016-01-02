@@ -66,6 +66,7 @@ class Split:
             print 'self.msg_id      :', self.msg_id
             print 'self.msg_attr    :', self.msg_attr
             print 'self.dev_id      :', self.dev_id
+            print 'self.msg_product :', self.msg_product
             print 'self.content     :', self.content
             print 'self.crc         :', self.crc
             print 'self.end_tag     :', self.end_tag
@@ -107,6 +108,7 @@ class Dispatch:
             'msg_id': self.rec_data.msg_id,
             'msg_attr': self.rec_data.msg_attr,
             'dev_id': self.rec_data.dev_id,
+            'msg_product': self.rec_data.msg_product,
             'content': self.rec_data.content,
             'crc': self.rec_data.crc
         }

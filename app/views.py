@@ -23,7 +23,7 @@ def server_commonly_response(request):
 
 
 def hello(request):
-    print 'The request is   :', request
+    print 'The request is -->  :', request
 
 
 if __name__ == '__main__':
