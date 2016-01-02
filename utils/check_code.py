@@ -1,7 +1,7 @@
 def check(a_tuple):
     flag = True
     check_code = 1
-    temp = a_tuple
+    temp = a_tuple[:-1]
     for each in temp:
         if flag:
             check_code = each
@@ -12,5 +12,5 @@ def check(a_tuple):
 
 
 if __name__ == '__main__':
-    sample = (1,2,3,4,5,1)
+    sample = (1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 43)
     print check(sample)

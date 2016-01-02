@@ -39,7 +39,8 @@ def is_complete(val, std):
     :param val:
     :return:
     """
-    if check(val) == std:
+    result = check(val)
+    if result == std:
         return True  # The crc encryption equal the client send!
     else:
         return False

@@ -8,26 +8,33 @@ sys.path.append("..")
 from utils.check_code import check
 
 
-def render(request, template):
+def render(request, ruler):
     """
 
-    :param template:
+    :param ruler:
     :type request: object
     """
     temp = []
-    each = template.split("|")
+    each = ruler.split("|")
+    each.append('crc')  # Auto loader the old CRC for value
     for item in each:
         if item in request:
             if request[item]:
                 for k in request[item]:
                     temp.append(k)
-    temp.append(request['crc'][0])  # Auto loader the old CRC for value
     check_code = check(temp)
-    temp[-1] = check_code       # change to a new CRC
-    temp.insert(0, 126)
-    temp.append(126)
-    return tuple(temp)          # will got a tuple for response ...
+    temp[-1] = check_code  # change to a new CRC
+    temp.insert(0, 126)  # Add the header tag
+    temp.append(126)  # Append the tail tag
+    return tuple(temp)  # will got a tuple for response ...
 
 
 def render_to_tuple(request):
     pass
+
+
+if __name__ == '__main__':
+    sample = {'abc': (1, 2), 'def': (3, 5), 'crc': (2,)}
+    template = 'abc|def'
+    result = render(sample, template)
+    print result

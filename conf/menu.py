@@ -4,6 +4,7 @@ It's no use for now!
 from core.urls import pattern
 
 """
+TODO
 This is a Request - Response Dicts
 Why need those middle ware?
 because, sometime we have many-to-many relationship!

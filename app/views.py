@@ -17,8 +17,13 @@ def auth(request):
     return render(request, template)
 
 
+def server_commonly_response(request):
+    template = 't_product|msg_id'
+    return render(request, template)
+
+
 def hello(request):
-    print 'hey ! here you go'
+    print 'The request is   :', request
 
 
 if __name__ == '__main__':
@@ -27,5 +32,5 @@ if __name__ == '__main__':
     """
     request = {'msg_id': (1, 2), 'msg_attr': (0, 2), 'dev_id': (153, 17, 152, 64, 130, 104), 't_product': (0, 1),
                'content': (81, 82), 'crc': (185,)}
-    example = auth(request, None)
+    example = server_commonly_response(request)
     print example

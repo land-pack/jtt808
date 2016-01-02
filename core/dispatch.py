@@ -35,7 +35,7 @@ class Split:
 
     def __init__(self, val):
 
-        self.message_head_content = val[1:-2]
+        self.message_head_content = val[1:-1]
         self.crc = val[-2]  # The crc encryption from terminal!
         self.debug = True
         if is_complete(self.message_head_content, self.crc):
