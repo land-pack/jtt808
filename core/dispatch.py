@@ -71,7 +71,7 @@ class Split:
             print 'self.crc         :', self.crc
             print 'self.end_tag     :', self.end_tag
         else:
-            print 'There are no assign because the crc have no right!'
+            print 'There are no assign! because the crc have no right!'
 
 
 class Dispatch:

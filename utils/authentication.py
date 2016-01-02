@@ -1,8 +1,14 @@
-from datetime import datetime
+import random
 
 
-def simple():
-    """
-    :return: just a string like 20151230
-    """
-    return str(datetime.today().date()).replace('-', '')
+def simple_auth():
+    result = []
+    for i in range(8):
+        temp = random.randint(1, 100)
+        result.append(temp)
+    return tuple(result)
+
+
+if __name__ == '__main__':
+    result = simple_auth()
+    print result

@@ -1,5 +1,5 @@
 from shortcuts.template import render
-from utils.authentication import simple
+
 
 
 def register(request):
@@ -18,7 +18,7 @@ def auth(request):
 
 
 def server_commonly_response(request):
-    template = 't_product|msg_id'
+    template = 't_product|msg_id|msg_attr|sys_err|sys_err|sys_auth'
     return render(request, template)
 
 
@@ -33,4 +33,4 @@ if __name__ == '__main__':
     request = {'msg_id': (1, 2), 'msg_attr': (0, 2), 'dev_id': (153, 17, 152, 64, 130, 104), 't_product': (0, 1),
                'content': (81, 82), 'crc': (185,)}
     example = server_commonly_response(request)
-    print example
+    print 'example      :', example

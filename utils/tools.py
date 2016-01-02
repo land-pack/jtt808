@@ -46,6 +46,14 @@ def is_complete(val, std):
         return False
 
 
+def getMiddleStr(content, startStr, endStr):
+    startIndex = content.index(startStr)
+    if startIndex >= 0:
+        startIndex += len(startStr)
+    endIndex = content.index(endStr)
+    return content[startIndex:endIndex]
+
+
 if __name__ == '__main__':
     sample1 = (127, 2)
     print is_subpackage(sample1)

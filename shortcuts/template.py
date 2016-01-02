@@ -6,6 +6,8 @@ import sys
 
 sys.path.append("..")
 from utils.check_code import check
+from utils.tools import getMiddleStr
+from conf.protocols import SYSTEM_CMD
 
 
 def render(request, ruler):
@@ -14,14 +16,20 @@ def render(request, ruler):
     :param ruler:
     :type request: object
     """
+    system_cmd = SYSTEM_CMD
     temp = []
     each = ruler.split("|")
     each.append('crc')  # Auto loader the old CRC for value
-    for item in each:
-        if item in request:
-            if request[item]:
-                for k in request[item]:
+    for item in each:  # loader the data format by ruler
+        if item in request:  # if the key in the request ,and go get it!
+            if type(request[item]) is tuple:  # because ,the value belong to The request Dicts, also the value is tuple!
+                for k in request[item]:  # get each element of the tuple!
                     temp.append(k)
+        elif item in system_cmd:
+            if type(system_cmd[item]) is tuple:
+                for k in system_cmd[item]:
+                    temp.append(k)
+
     check_code = check(temp)
     temp[-1] = check_code  # change to a new CRC
     temp.insert(0, 126)  # Add the header tag
@@ -29,8 +37,11 @@ def render(request, ruler):
     return tuple(temp)  # will got a tuple for response ...
 
 
-def render_to_tuple(request):
-    pass
+def render_to_tuple(request, ruler):
+    start = '{%'
+    end = '%}'
+    temp = getMiddleStr(ruler, start, end)
+    return render(request, temp)
 
 
 if __name__ == '__main__':
@@ -38,3 +49,6 @@ if __name__ == '__main__':
     template = 'abc|def'
     result = render(sample, template)
     print result
+    template2 = 'abc{% dbc|def %}kk'
+    result2 = render_to_tuple(sample, template2)
+    print result2
