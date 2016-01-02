@@ -60,7 +60,6 @@ class Split:
             # ignore this request from terminal device
             self.debug = False
 
-
     def show(self):
         if self.debug:
             print 'self.tag         :', self.tag
@@ -91,6 +90,7 @@ class Dispatch:
         self.menu_key = None  # Just a key of urlpatterns Dicts
         self.resolution()
         self.middle = self.distribute()
+        self.request_dict = None
         # self.show()
 
     def resolution(self):
@@ -102,9 +102,15 @@ class Dispatch:
         :return: None
         """
         self.request_data = tongue.Decode(self.request)
-        self.rec_data = Split(self.request_data.dst)  # Don't forget get dst attrbute
+        self.rec_data = Split(self.request_data.dst)  # Don't forget get dst attribute
+        self.request_dict = {
+            'msg_id': self.rec_data.msg_id,
+            'msg_attr': self.rec_data.msg_attr,
+            'dev_id': self.rec_data.dev_id,
+            'content': self.rec_data.content,
+            'crc': self.rec_data.crc
+        }
         self.msg_key = str(self.rec_data.msg_id)
-
 
     def distribute(self):
         """
@@ -124,7 +130,7 @@ class Dispatch:
 
         if self.msg_key in self.protocol:
             self.menu_key = self.protocol[self.msg_key]
-            return reflect(self.menu_key, self.rec_data)
+            return reflect(self.menu_key, self.request_dict)
 
         else:
             return None
