@@ -60,6 +60,7 @@ class Split:
             # ignore this request from terminal device
             self.debug = False
 
+
     def show(self):
         if self.debug:
             print 'self.tag         :', self.tag
@@ -103,6 +104,7 @@ class Dispatch:
         self.request_data = tongue.Decode(self.request)
         self.rec_data = Split(self.request_data.dst)  # Don't forget get dst attrbute
         self.msg_key = str(self.rec_data.msg_id)
+
 
     def distribute(self):
         """

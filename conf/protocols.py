@@ -5,6 +5,14 @@ to it.how about 'ter_reg_req' as it nickname!
 from core.urls import pattern
 from core.dns import dns_key
 
+MSG_STRUCTURE = (
+    'msg_id',
+    'msg_attr',
+    'dev_id',
+    'content',
+    'crc',
+)
+
 """
 ser     : server
 ter     : terminal
