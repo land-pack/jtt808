@@ -1,7 +1,6 @@
 from shortcuts.template import render
 
 
-
 def register(request):
     """
     :param request: original data format to Dicts from terminal!
@@ -18,7 +17,7 @@ def auth(request):
 
 
 def server_commonly_response(request):
-    template = 't_product|msg_id|msg_attr|sys_err|sys_err|sys_auth'
+    template = 't_product|msg_id|msg_attr|sys_ok|sys_auth'
     return render(request, template)
 
 

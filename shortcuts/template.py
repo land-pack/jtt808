@@ -3,10 +3,8 @@ This class expect two argument,one is a request (a dicts type)
 the another is a template split by a "|" string
 """
 import sys
-
 sys.path.append("..")
 from utils.check_code import check
-from utils.tools import getMiddleStr
 from conf.protocols import SYSTEM_CMD
 
 
@@ -37,18 +35,8 @@ def render(request, ruler):
     return tuple(temp)  # will got a tuple for response ...
 
 
-def render_to_tuple(request, ruler):
-    start = '{%'
-    end = '%}'
-    temp = getMiddleStr(ruler, start, end)
-    return render(request, temp)
-
-
 if __name__ == '__main__':
     sample = {'abc': (1, 2), 'def': (3, 5), 'crc': (2,)}
     template = 'abc|def'
     result = render(sample, template)
     print result
-    template2 = 'abc{% dbc|def %}kk'
-    result2 = render_to_tuple(sample, template2)
-    print result2

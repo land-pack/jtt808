@@ -36,12 +36,17 @@ def dns_key(val):
     return temp
 
 
+def dns_value(val):
+    temp = {}
+    for item in val:
+        temp[item] = str(dns(val[item]))
+    return temp
+
+
 if __name__ == '__main__':
-    x = {'8100': 'abc', '0x9100': '123'}
-    print 'old  :', x
-    print 'new  :', dns_key(x)
-"""
-Result:
-old  : {'0x9100': '123', '8100': 'abc'}
-new  : {'(145, 0)': '123', '(129, 0)': 'abc'}
-"""
+    sample1 = {'8100': 'abc', '0x9100': '123'}
+    print 'old  :', sample1
+    print 'new  :', dns_key(sample1)
+    sample2 = {'sys_ok': '0x9100', 'sys_err': '0x8100', 'sys_su': '0x7100'}
+    print 'old  :', sample2
+    print 'new  :', dns_value(sample2)
