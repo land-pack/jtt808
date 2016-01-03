@@ -17,7 +17,8 @@ def auth(request):
 
 
 def server_commonly_response(request):
-    template = 't_product|msg_id|msg_attr|sys_ok|sys_auth'
+    # message header = 'sys_msg_id|msg_attr|dev_id|s_product'
+    template = 't_product|msg_id|sys_ok'
     return render(request, template)
 
 
