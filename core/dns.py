@@ -1,5 +1,6 @@
 import struct
 import binascii
+from ast import literal_eval
 
 
 def dns(val):
@@ -43,6 +44,14 @@ def dns_value(val):
     return temp
 
 
+def dns_k2v(val):
+    result = {}
+    temp = {value: key for key, value in val.items()}
+    for item in temp:
+        result[item] = literal_eval(temp[item])
+    return result
+
+
 if __name__ == '__main__':
     sample1 = {'8100': 'abc', '0x9100': '123'}
     print 'old  :', sample1
@@ -50,3 +59,9 @@ if __name__ == '__main__':
     sample2 = {'sys_ok': '0x9100', 'sys_err': '0x8100', 'sys_su': '0x7100'}
     print 'old  :', sample2
     print 'new  :', dns_value(sample2)
+    print 'old  :', dns_value(sample2)
+    new_guy = dns_value(sample2)
+    # -------------------------------------
+    sample3 = {'(1,2)': 'ser_rsp', '(3,4)': 'ok'}
+    print 'sample3      :', sample3
+    print 'new sample3  :', dns_k2v(sample3)

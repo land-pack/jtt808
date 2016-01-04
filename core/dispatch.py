@@ -132,7 +132,10 @@ class Dispatch:
 
         if self.msg_key in self.protocol:
             self.menu_key = self.protocol[self.msg_key]
-            return reflect(self.menu_key, self.request_dict)
+            result = reflect(self.menu_key, self.request_dict)
+            print 'result from reflect ...', result
+            self.conn.sendall(tongue.Code(result))
+            return result
 
         else:
             return None

@@ -1,29 +1,34 @@
 from shortcuts.template import render
 
 
-def register(request):
+def register(val):
     """
-    :param request: original data format to Dicts from terminal!
+    :param val: original data format to Dicts from terminal!
     :return: a render which a tuple factory
     you should know what you are doing and which field you need!
     """
     template = 'msg_id|msg_attr|dev_id|t_product|content'
-    return render(request, template)
+    return render(val, template)
 
 
-def auth(request):
+def auth(val):
     template = 'msg_id|msg_attr|dev_id|t_product|content'
-    return render(request, template)
+    return render(val, template)
 
 
-def server_commonly_response(request):
+def server_commonly_response(val):
     # message header = 'sys_msg_id|msg_attr|dev_id|s_product'
-    template = 't_product|msg_id|sys_ok'
-    return render(request, template)
+    """
+    :param val:
+    :return:
+    """
+    msg_content = 't_product|msg_id|sys_ok'
+    template = 'ser_com_rsp|sys_fixed_msg_attr|dev_id|sys_product|' + msg_content
+    return render(val, template)
 
 
-def hello(request):
-    print 'The request is -->  :', request
+def hello(val):
+    print 'The request is -->  :', val
 
 
 if __name__ == '__main__':

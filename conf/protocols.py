@@ -3,8 +3,9 @@
 to it.how about 'ter_reg_req' as it nickname!
 """
 from core.urls import pattern
-from core.dns import dns_key
+from core.dns import dns_key,dns_k2v
 from utils.authentication import simple_auth
+from ast import literal_eval
 
 MSG_STRUCTURE = (
     'msg_id',
@@ -18,7 +19,10 @@ AUTH_CODE = simple_auth()
 SYSTEM_CMD = pattern(
         ('sys_ok', (1, 0)),
         ('sys_err', (2, 0)),
-        ('sys_auth', AUTH_CODE)
+        ('sys_crc', (1,)),
+        ('sys_auth', AUTH_CODE),
+        ('sys_product', (0, 1)),
+        ('sys_fixed_msg_attr', (0, 5))  # This is a fixed value ,you should calculate the msg attr yourself!
 )
 
 """
@@ -44,9 +48,16 @@ example2: 0100 --> (1,2)
 """
 MSG_ID = dns_key(MSG_ID_ORIGINAL)
 
+SYS_ID = dns_k2v(MSG_ID)
+
 if __name__ == '__main__':
     for item in MSG_ID:
         print 'Request is   :%s -- Response is  :%s' % (item, MSG_ID[item])
 
     for item in SYSTEM_CMD:
-        print 'system_cmd is   %s   -- value is :%s' % (item,SYSTEM_CMD[item])
+        print 'system_cmd is   %s   -- value is :%s' % (item, SYSTEM_CMD[item])
+
+    for item in SYS_ID:
+        print 'sys_id       :%s -- value is     :%s' % (item, SYS_ID[item])
+
+    print SYS_ID
