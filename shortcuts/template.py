@@ -43,6 +43,7 @@ def render(request, ruler):
     send_data_binary = tongue.Code(send_data).dst
     print 'send_data_binary :', send_data_binary
     if 'GET' in request:
+        print 'send register server commonly response ...'
         request['GET'].sendall(send_data_binary)
     else:
         print 'No Get attribute,You may run it on local main()'
