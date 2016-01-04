@@ -111,7 +111,7 @@ class Dispatch:
             'msg_product': self.rec_data.msg_product,
             'content': self.rec_data.content,
             'crc': self.rec_data.crc,
-            'GET': self.conn
+            'GET': self.conn  # For response the socket
         }
         self.msg_key = str(self.rec_data.msg_id)
 

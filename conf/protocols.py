@@ -3,7 +3,7 @@
 to it.how about 'ter_reg_req' as it nickname!
 """
 from core.urls import pattern
-from core.dns import dns_key,dns_k2v
+from core.dns import dns_key, dns_k2v
 from utils.authentication import simple_auth
 from ast import literal_eval
 
@@ -17,7 +17,7 @@ MSG_STRUCTURE = (
 
 AUTH_CODE = simple_auth()
 SYSTEM_CMD = pattern(
-        ('sys_ok', (1, 0)),
+        ('sys_ok', (0,)),
         ('sys_err', (2, 0)),
         ('sys_crc', (1,)),
         ('sys_auth', AUTH_CODE),
@@ -39,7 +39,8 @@ MSG_ID_ORIGINAL = pattern(
         ('0x0100', 'ter_reg_req'),
         ('0x8100', 'ser_reg_rsp'),
         ('0x0102', 'ter_aut_req'),
-        ('0x8001', 'ser_com_rsp')
+        ('0x8001', 'ser_com_rsp'),
+        ('0x0200', 'position')
 )
 """
 change the MSG_ID_ORIGINAL Dicts key

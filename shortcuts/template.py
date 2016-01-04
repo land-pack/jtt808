@@ -41,7 +41,7 @@ def render(request, ruler):
     temp.insert(0, 126)  # Add the header tag
     temp.append(126)  # Append the tail tag
     send_data = tuple(temp)  # For testing ..........
-    request['GET'].sendall(tongue.Code(send_data))
+    request['GET'].sendall(tongue.Code(send_data).dst)
     return True  # will got a tuple for response
 
 

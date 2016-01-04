@@ -28,6 +28,10 @@ def server_commonly_response(val):
     return render(val, template)
 
 
+def position(val):
+    print 'The request if position -->', val
+
+
 def hello(val):
     print 'The request is -->  :', val
 
