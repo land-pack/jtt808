@@ -22,6 +22,7 @@ def server_commonly_response(val):
     :param val:
     :return:
     """
+    print 'output client request ....by views.py-->', val
     msg_content = 't_product|msg_id|sys_ok'
     template = 'ser_com_rsp|sys_fixed_msg_attr|dev_id|sys_product|' + msg_content
     return render(val, template)
