@@ -9,7 +9,6 @@ from conf.protocols import MSG_ID
 from app.urls import urlpatterns
 import tongue
 
-from shortcuts.template import global_send_data
 """
 urlpatterns is a function Dicts,and it will automatic looking
 for the target function according your menu_key is !
@@ -111,7 +110,8 @@ class Dispatch:
             'dev_id': self.rec_data.dev_id,
             'msg_product': self.rec_data.msg_product,
             'content': self.rec_data.content,
-            'crc': self.rec_data.crc
+            'crc': self.rec_data.crc,
+            'GET': self.conn
         }
         self.msg_key = str(self.rec_data.msg_id)
 
@@ -134,10 +134,7 @@ class Dispatch:
         if self.msg_key in self.protocol:
             self.menu_key = self.protocol[self.msg_key]
             reflect(self.menu_key, self.request_dict)
-            result = global_send_data
-            print 'result from reflect ...', result
-            self.conn.sendall(tongue.Code(result))
-            return result
+            return True
 
         else:
             return None

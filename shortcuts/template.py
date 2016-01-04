@@ -7,8 +7,7 @@ import sys
 sys.path.append("..")
 from utils.check_code import check
 from conf.protocols import SYSTEM_CMD, SYS_ID
-
-global_send_data = None
+import tongue
 
 
 def render(request, ruler):
@@ -41,8 +40,9 @@ def render(request, ruler):
     temp[-1] = check_code  # change to a new CRC
     temp.insert(0, 126)  # Add the header tag
     temp.append(126)  # Append the tail tag
-    global_send_data = tuple(temp)  # For testing ..........
-    return tuple(temp)  # will got a tuple for response
+    send_data = tuple(temp)  # For testing ..........
+    request.GET(tongue.Code(send_data))
+    return True  # will got a tuple for response
 
 
 if __name__ == '__main__':
