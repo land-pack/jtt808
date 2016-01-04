@@ -90,6 +90,7 @@ class Dispatch:
         self.msg_key = None
         self.menu_key = None  # Just a key of urlpatterns Dicts
         self.resolution()
+        self.distribute()
         self.request_dict = None
         # self.show()
 
