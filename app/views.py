@@ -12,8 +12,8 @@ def register(val):
 
 
 def auth(val):
-    msg_content = 'msg_product|msg_id|sys_ok'
-    template = 'ser_com_rsp|sys_fixed_msg_attr|dev_id|sys_product|' + msg_content
+    msg_content = 'client_msg_product|client_msg_id|sys_ok'
+    template = 'ser_com_rsp|sys_fixed_msg_attr|client_dev_id|sys_product|' + msg_content
     return render(val, template)
 
 
