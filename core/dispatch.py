@@ -105,12 +105,12 @@ class Dispatch:
         self.request_data = tongue.Decode(self.request)
         self.rec_data = Split(self.request_data.dst)  # Don't forget get dst attribute
         self.request_dict = {
-            'msg_id': self.rec_data.msg_id,
-            'msg_attr': self.rec_data.msg_attr,
-            'dev_id': self.rec_data.dev_id,
-            'msg_product': self.rec_data.msg_product,
-            'content': self.rec_data.content,
-            'crc': self.rec_data.crc,
+            'client_msg_id': self.rec_data.msg_id,
+            'client_msg_attr': self.rec_data.msg_attr,
+            'client_dev_id': self.rec_data.dev_id,
+            'client_msg_product': self.rec_data.msg_product,
+            'client_content': self.rec_data.content,
+            'client_crc': self.rec_data.crc,
             'GET': self.conn  # For response the socket
         }
         self.msg_key = str(self.rec_data.msg_id)
@@ -138,10 +138,6 @@ class Dispatch:
 
         else:
             return None
-
-    def show(self):
-        print 'self.middle      :', self.middle
-
 
 if __name__ == '__main__':
     # Test the Split class

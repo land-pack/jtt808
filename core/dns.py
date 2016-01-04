@@ -53,15 +53,22 @@ def dns_k2v(val):
 
 
 if __name__ == '__main__':
-    sample1 = {'8100': 'abc', '0x9100': '123'}
+    print '-----------Test dns()------------------'
+    sample1 = '0x8100'
     print 'old  :', sample1
-    print 'new  :', dns_key(sample1)
-    sample2 = {'sys_ok': '0x9100', 'sys_err': '0x8100', 'sys_su': '0x7100'}
+    print 'new  :', dns(sample1)
+
+    print '-----------Test dns_key()--------------'
+    sample2 = {'8100': 'abc', '0x9100': 'def', '0x7100': 'hij'}
     print 'old  :', sample2
-    print 'new  :', dns_value(sample2)
-    print 'old  :', dns_value(sample2)
-    new_guy = dns_value(sample2)
-    # -------------------------------------
-    sample3 = {'(1,2)': 'ser_rsp', '(3,4)': 'ok'}
-    print 'sample3      :', sample3
-    print 'new sample3  :', dns_k2v(sample3)
+    print 'new  :', dns_key(sample2)
+
+    print '-----------Test dns_value()------------'
+    sample3 = {'abc': '0x9100', 'def': '0x8100', 'hij': '0x7100'}
+    print 'old  :', sample3
+    print 'new  :', dns_value(sample3)
+
+    print '-----------Test dns_k2v()--------------'
+    sample4 = {'(1,2)': 'abc', '(3,4)': 'def'}
+    print 'sample3      :', sample4
+    print 'new sample3  :', dns_k2v(sample4)

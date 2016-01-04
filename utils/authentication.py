@@ -1,12 +1,13 @@
 import random
+from conf.settings import NUM_OF_CODE
 
 
 def simple_auth():
-    result = []
-    for i in range(8):
+    result_list = []
+    for i in range(NUM_OF_CODE):
         temp = random.randint(1, 100)
-        result.append(temp)
-    return tuple(result)
+        result_list.append(temp)
+    return tuple(result_list)
 
 
 if __name__ == '__main__':

@@ -6,14 +6,6 @@ from core.urls import pattern
 from core.dns import dns_key, dns_k2v
 from utils.authentication import simple_auth
 
-MSG_STRUCTURE = (
-    'msg_id',
-    'msg_attr',
-    'dev_id',
-    'content',
-    'crc',
-)
-
 AUTH_CODE = simple_auth()
 SYSTEM_CMD = pattern(
         ('sys_ok', (0,)),
@@ -51,13 +43,7 @@ MSG_ID = dns_key(MSG_ID_ORIGINAL)
 SYS_ID = dns_k2v(MSG_ID)
 
 if __name__ == '__main__':
-    for item in MSG_ID:
-        print 'Request is   :%s -- Response is  :%s' % (item, MSG_ID[item])
 
-    for item in SYSTEM_CMD:
-        print 'system_cmd is   %s   -- value is :%s' % (item, SYSTEM_CMD[item])
-
-    for item in SYS_ID:
-        print 'sys_id       :%s -- value is     :%s' % (item, SYS_ID[item])
-
-    print SYS_ID
+    print 'MSG_ID       :', MSG_ID
+    print 'SYSTEM_CMD   :', SYSTEM_CMD
+    print 'SYS_ID       :', SYS_ID

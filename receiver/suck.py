@@ -1,14 +1,16 @@
 import socket
 import sys
+
 sys.path.append("..")
 # from dispatch_sample import dispatch_sample
 from core.dispatch import Dispatch
+from conf.settings import IP_PORT
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the part
-server_address = ('0.0.0.0', 5555)
+server_address = IP_PORT
 print >> sys.stderr, 'starting up on %s port %s' % server_address
 sock.bind(server_address)
 

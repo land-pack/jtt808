@@ -1,5 +1,6 @@
 def pattern(*val):
     """
+    To make a tuple being a Dicts!
     :param val: a tuple-inline a tuple from the apps-urls.py
     :return: a Dicts
     """
