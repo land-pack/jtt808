@@ -5,7 +5,6 @@ to it.how about 'ter_reg_req' as it nickname!
 from core.urls import pattern
 from core.dns import dns_key, dns_k2v
 from utils.authentication import simple_auth
-from ast import literal_eval
 
 MSG_STRUCTURE = (
     'msg_id',

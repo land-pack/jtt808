@@ -22,7 +22,6 @@ def render(request, ruler):
     each = ruler.split("|")
     each.append('sys_crc')  # Auto loader the old CRC for value for occupying
     for item in each:  # loader the data format by ruler
-        print 'item is  :', item
         if item in request:  # if the key in the request ,and go get it!
             if isinstance(request[item], tuple):  # because , the value will be a  tuple!
                 for k in request[item]:  # get each element of the tuple!
@@ -41,7 +40,12 @@ def render(request, ruler):
     temp.insert(0, 126)  # Add the header tag
     temp.append(126)  # Append the tail tag
     send_data = tuple(temp)  # For testing ..........
-    request['GET'].sendall(tongue.Code(send_data).dst)
+    send_data_binary = tongue.Code(send_data).dst
+    print 'send_data_binary :', send_data_binary
+    if 'GET' in request:
+        request['GET'].sendall(send_data_binary)
+    else:
+        print 'No Get attribute,You may run it on local main()'
     return True  # will got a tuple for response
 
 

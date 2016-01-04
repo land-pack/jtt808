@@ -89,9 +89,9 @@ class Dispatch:
         self.rec_data = None
         self.msg_key = None
         self.menu_key = None  # Just a key of urlpatterns Dicts
+        self.request_dict = None
         self.resolution()
         self.distribute()
-        self.request_dict = None
         # self.show()
 
     def resolution(self):
