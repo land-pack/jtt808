@@ -115,6 +115,12 @@ def to_position(val):
     ret = temp / 1000000
     return ret
 
+def to_altitude(val):
+    a_value = to_dword(val)
+    temp = float(a_value)
+    ret = temp
+    return ret
+
 
 if __name__ == '__main__':
     sample1 = (127, 2)
@@ -149,3 +155,8 @@ if __name__ == '__main__':
     sample6 = (6, 168, 93, 143)
     print 'old      :', sample6
     print 'new      :', to_position(sample6)
+
+    print '---------Test to_altitude----------'
+    sample7 = (4, 89)
+    print 'old      :', sample7
+    print 'new      :', to_altitude(sample7)

@@ -22,6 +22,10 @@ def position(val):
     content = val['client_content']
     position_instance = PositionSplit(content)
     print 'gps datetime     :', position_instance.hash_data['datetime']
+    print 'gps longitude     :', position_instance.hash_data['longitude']
+    print 'gps latitude     :', position_instance.hash_data['latitude']
+    print 'gps altitude     :', position_instance.hash_data['altitude']
+    print 'gps speed     :', position_instance.hash_data['speed']
 
 
 if __name__ == '__main__':
