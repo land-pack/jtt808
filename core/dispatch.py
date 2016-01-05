@@ -5,6 +5,7 @@ it destination!
 from utils.tools import is_subpackage
 from utils.tools import is_encryption
 from utils.tools import is_complete
+from utils.tools import dec2hex
 from conf.protocols import MSG_ID
 from app.urls import urlpatterns
 import tongue
@@ -91,6 +92,7 @@ class Dispatch:
         self.conn = conn
         self.request_data = None
         self.client_tuple_data = None
+        self.hex_format_data = None
         self.rec_data = None
         self.msg_key = None
         self.menu_key = None  # Just a key of urlpatterns Dicts
@@ -113,8 +115,8 @@ class Dispatch:
         """
         self.request_data = tongue.Decode(self.request)
         self.client_tuple_data = self.request_data.dst  # Don't forget get dst attribute
-        print 'client tuple data like :', self.client_tuple_data
-        self.rec_data = Split(self.client_tuple_data)
+        self.hex_format_data = dec2hex(self.client_tuple_data)
+        self.rec_data = Split(self.hex_format_data)
 
         if isinstance(self.rec_data, Split):
             self.request_dict = {
@@ -132,7 +134,6 @@ class Dispatch:
         else:
             print 'No Split instance !'
             self.PUB = False
-
 
     def distribute(self):
         """

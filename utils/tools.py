@@ -45,8 +45,29 @@ def is_complete(val, std):
     else:
         return False
 
+
+def dec2hex(val):
+    """
+    :param val: a tuple ,which include decimal number!
+    :return: a tuple ,which include hex number!
+    """
+    temp = []
+    for item in val:
+        temp_item = hex(item).replace('0x', '')
+        temp_save = int(temp_item)
+        temp.append(temp_save)
+
+    return tuple(temp)
+
+
 if __name__ == '__main__':
     sample1 = (127, 2)
     print is_subpackage(sample1)
     sample2 = (1023, 0)
     print is_encryption(sample2)
+
+    print '----------Test dec2hex----------------'
+    sample3 = (22, 1, 5, 8, 82)
+    result3 = dec2hex(sample3)
+    print 'old      :', sample3
+    print 'new      :', result3
