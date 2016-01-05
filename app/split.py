@@ -1,5 +1,6 @@
 from utils.tools import to_bcd
 from utils.tools import to_timestamp
+from utils.tools import to_position
 
 
 class PositionSplit:
@@ -21,6 +22,8 @@ class PositionSplit:
         print 'self.hash_data   :', self.hash_data
         self.temp = to_bcd(self.hash_data['datetime'])
         self.hash_data['datetime'] = to_timestamp(self.temp)
+        self.hash_data['latitude'] = to_position(self.hash_data['latitude'])
+        self.hash_data['longitude'] = to_position(self.hash_data['longitude'])
 
 
 if __name__ == '__main__':

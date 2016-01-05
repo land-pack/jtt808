@@ -94,6 +94,28 @@ def to_timestamp(val):
     return to_sec(temp)
 
 
+def to_dword(val):
+    """
+    :param val: a tuple (2, 110, 226, 147)
+    :return:40.821395 the value range(38.0000 ~ 42.00000)
+    """
+    temp_hex = []
+    for item in val:
+        temp_hex.append(hex(item))
+    temp_str = ''
+    for item in temp_hex:
+        temp_str += str(item).replace('0x', '')
+    result = int(temp_str, 16)
+    return result
+
+
+def to_position(val):
+    a_value = to_dword(val)
+    temp = float(a_value)
+    ret = temp / 1000000
+    return ret
+
+
 if __name__ == '__main__':
     sample1 = (127, 2)
     print is_subpackage(sample1)
@@ -112,3 +134,18 @@ if __name__ == '__main__':
 
     print '----------Test to_sec ----------------'
     print 'the sec      :', to_sec(new_datetime)
+
+    print '----------Test to_dword --------------'
+    sample5 = (2, 110, 226, 147)
+    sample5x = to_dword(sample5)
+    print 'old      :', sample5
+    print 'new      :', sample5x
+
+    print '----------Test to_position------------'
+    print 'old      :', sample5
+    print 'new      :', to_position(sample5)
+
+    print '---------Test to_position-----------'
+    sample6 = (6, 168, 93, 143)
+    print 'old      :', sample6
+    print 'new      :', to_position(sample6)
