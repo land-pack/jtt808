@@ -2,6 +2,7 @@ from utils.tools import to_bcd
 from utils.tools import to_timestamp
 from utils.tools import to_double_word
 from utils.tools import to_a_word
+from utils.tools import to_int_dword
 
 
 class PositionSplit:
@@ -10,6 +11,7 @@ class PositionSplit:
     """
 
     def __init__(self, val):
+        self.exclude_flow = ['alarm', 'status', 'direction']
         self.hash_data = {'alarm': val[0:4],
                           'status': val[4:8],
                           'latitude': val[8:12],
@@ -23,9 +25,15 @@ class PositionSplit:
             value = self.hash_data[item]
             value_len = len(value)
             if value_len == 4:
-                self.hash_data[item] = to_double_word(value)
+                if item in self.exclude_flow:
+                    self.hash_data[item] = to_int_dword(value)
+                else:
+                    self.hash_data[item] = to_double_word(value)
             elif value_len == 2:
-                self.hash_data[item] = to_a_word(value)
+                if item in self.exclude_flow:
+                    self.hash_data[item] = to_int_dword(value)
+                else:
+                    self.hash_data[item] = to_a_word(value)
             elif value_len == 6:
                 temp = to_bcd(value)
                 self.hash_data[item] = to_timestamp(temp)

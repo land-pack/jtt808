@@ -97,7 +97,7 @@ def to_timestamp(val):
 def to_dword(val):
     """
     :param val: a tuple (2, 110, 226, 147)
-    :return:40.821395 the value range(38.0000 ~ 42.00000)
+    :return:40821395 but what we need is range(38.0000 ~ 42.00000)
     """
     temp_hex = []
     for item in val:
@@ -110,24 +110,30 @@ def to_dword(val):
 
 
 def to_double_word(val):
+    """
+    :param val: a tuple (2, 110, 226, 147)
+    :return: (38.0000 ~ 42.00000)
+    """
     a_value = to_dword(val)
     temp = float(a_value)
     ret = temp / 1000000
     return ret
 
 
+def to_int_dword(val):
+    a_value = to_dword(val)
+    temp = int(a_value)
+    return temp
+
+
 def to_a_word(val):
+    """
+    :param val: a tuple with two element (2, 110)
+    :return:
+    """
     a_value = to_dword(val)
     temp = float(a_value)
-    ret = temp
-    return ret
-
-
-def is_double_word(val):
-    if len(val) == 4:
-        return True
-    else:
-        return False
+    return temp
 
 
 if __name__ == '__main__':
@@ -168,3 +174,8 @@ if __name__ == '__main__':
     sample7 = (4, 89)
     print 'old      :', sample7
     print 'new      :', to_a_word(sample7)
+
+    print '---------Test to_int_dword---------'
+    sample8 = (6, 168)
+    print 'old      :', sample8
+    print 'new      :', to_int_dword(sample8)
