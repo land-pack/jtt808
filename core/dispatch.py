@@ -35,30 +35,34 @@ class Split:
 
     def __init__(self, val):
 
-        self.message_head_content = val[1:-1]
-        self.crc = val[-2]  # The crc encryption from terminal!
-        self.debug = True
-        if is_complete(self.message_head_content, self.crc):
-            self.tag = val[0:1]
-            self.msg_id = val[1:3]
-            self.msg_attr = val[3:5]
-            self.dev_id = val[5:11]
-            self.msg_product = val[11:13]
-            self.end_tag = val[-1:]
-            # check if subpackage
-            if is_subpackage(self.msg_attr):
-                self.package_item = val[13:15]
-                self.content = val[15:-2]
+        if val:
+            self.message_head_content = val[1:-1]
+            self.crc = val[-2]  # The crc encryption from terminal!
+            self.debug = True
+            if is_complete(self.message_head_content, self.crc):
+                self.tag = val[0:1]
+                self.msg_id = val[1:3]
+                self.msg_attr = val[3:5]
+                self.dev_id = val[5:11]
+                self.msg_product = val[11:13]
+                self.end_tag = val[-1:]
+                # check if subpackage
+                if is_subpackage(self.msg_attr):
+                    self.package_item = val[13:15]
+                    self.content = val[15:-2]
+                else:
+                    # No message package item optional
+                    self.content = val[13:-2]
+                    # check if use CRC (Cyclic Redundancy Check)
+                    if is_encryption(self.msg_attr):
+                        # TODO something for deciphering
+                        pass
             else:
-                # No message package item optional
-                self.content = val[13:-2]
-                # check if use CRC (Cyclic Redundancy Check)
-                if is_encryption(self.msg_attr):
-                    # TODO something for deciphering
-                    pass
+                # ignore this request from terminal device
+                self.debug = False
+                print 'No complete data from client!'
         else:
-            # ignore this request from terminal device
-            self.debug = False
+            print 'val is no valid data'
 
     def show(self):
         if self.debug:
@@ -90,8 +94,12 @@ class Dispatch:
         self.msg_key = None
         self.menu_key = None  # Just a key of urlpatterns Dicts
         self.request_dict = None
+        self.PUB = True
         self.resolution()
-        self.distribute()
+        if self.PUB:
+            self.distribute()
+        else:
+            print 'Can publish your data!'
         # self.show()
 
     def resolution(self):
@@ -104,7 +112,7 @@ class Dispatch:
         """
         self.request_data = tongue.Decode(self.request)
         self.rec_data = Split(self.request_data.dst)  # Don't forget get dst attribute
-        if self.rec_data:
+        if isinstance(self.rec_data, Split):
             self.request_dict = {
                 'client_msg_id': self.rec_data.msg_id,
                 'client_msg_attr': self.rec_data.msg_attr,
@@ -116,7 +124,8 @@ class Dispatch:
             }
             self.msg_key = str(self.rec_data.msg_id)
         else:
-            print 'No more data!'
+            print 'No Split instance !'
+            self.PUB = False
 
     def distribute(self):
         """
