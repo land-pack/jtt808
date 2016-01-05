@@ -90,6 +90,7 @@ class Dispatch:
         self.request = request
         self.conn = conn
         self.request_data = None
+        self.client_tuple_data = None
         self.rec_data = None
         self.msg_key = None
         self.menu_key = None  # Just a key of urlpatterns Dicts
@@ -100,7 +101,7 @@ class Dispatch:
             self.distribute()
         else:
             print 'Can publish your data!'
-        # self.show()
+            # self.show()
 
     def resolution(self):
         """
@@ -111,7 +112,10 @@ class Dispatch:
         :return: None
         """
         self.request_data = tongue.Decode(self.request)
-        self.rec_data = Split(self.request_data.dst)  # Don't forget get dst attribute
+        self.client_tuple_data = self.request_data.dst  # Don't forget get dst attribute
+        print 'client tuple data like :', self.client_tuple_data
+        self.rec_data = Split(self.client_tuple_data)
+
         if isinstance(self.rec_data, Split):
             self.request_dict = {
                 'client_msg_id': self.rec_data.msg_id,
@@ -121,11 +125,14 @@ class Dispatch:
                 'client_content': self.rec_data.content,
                 'client_crc': self.rec_data.crc,
                 'GET': self.conn  # For response the socket
+
             }
+
             self.msg_key = str(self.rec_data.msg_id)
         else:
             print 'No Split instance !'
             self.PUB = False
+
 
     def distribute(self):
         """
