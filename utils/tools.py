@@ -46,7 +46,7 @@ def is_complete(val, std):
         return False
 
 
-def dec2hex(val):
+def to_bcd(val):
     """
     :param val: a tuple ,which include decimal number!
     :return: a tuple ,which include hex number!
@@ -68,6 +68,6 @@ if __name__ == '__main__':
 
     print '----------Test dec2hex----------------'
     sample3 = (22, 1, 5, 8, 82)
-    result3 = dec2hex(sample3)
+    result3 = to_bcd(sample3)
     print 'old      :', sample3
     print 'new      :', result3

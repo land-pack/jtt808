@@ -1,4 +1,5 @@
 from shortcuts.template import render
+from app.split import PositionSplit
 
 
 def register(val):
@@ -18,7 +19,9 @@ def auth(val):
 
 
 def position(val):
-    print 'The request if position -->', val
+    content = val['client_content']
+    position_instance = PositionSplit(content)
+    print 'gps datetime     :', position_instance.hash_data['datetime']
 
 
 if __name__ == '__main__':

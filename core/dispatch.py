@@ -5,7 +5,7 @@ it destination!
 from utils.tools import is_subpackage
 from utils.tools import is_encryption
 from utils.tools import is_complete
-from utils.tools import dec2hex
+from utils.tools import to_bcd
 from conf.protocols import MSG_ID
 from app.urls import urlpatterns
 import tongue
@@ -115,8 +115,8 @@ class Dispatch:
         """
         self.request_data = tongue.Decode(self.request)
         self.client_tuple_data = self.request_data.dst  # Don't forget get dst attribute
-        self.hex_format_data = dec2hex(self.client_tuple_data)
-        self.rec_data = Split(self.hex_format_data)
+        # self.hex_format_data = dec2hex(self.client_tuple_data)
+        self.rec_data = Split(self.client_tuple_data)
 
         if isinstance(self.rec_data, Split):
             self.request_dict = {

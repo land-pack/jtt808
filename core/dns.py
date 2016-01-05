@@ -1,7 +1,7 @@
 import struct
 import binascii
 from ast import literal_eval
-from utils.tools import dec2hex
+from utils.tools import to_bcd
 
 
 def dns(val):
@@ -16,8 +16,8 @@ def dns(val):
     data_len = len(val)
     s = struct.Struct('%iB' % data_len)
     temp_dec_k = s.unpack(val)
-    temp_hex_k = dec2hex(temp_dec_k)
-    return temp_hex_k
+    # temp_hex_k = dec2hex(temp_dec_k)
+    return temp_dec_k
 
 
 """
