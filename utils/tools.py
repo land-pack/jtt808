@@ -4,6 +4,7 @@ Like example (1,2) become 0000 0001 0000 0010
 and the digist should be :512+2=514
 """
 from utils.check_code import check
+import time
 
 
 def is_subpackage(val):
@@ -60,6 +61,39 @@ def to_bcd(val):
     return tuple(temp)
 
 
+def to_datetime(val):
+    date = val[0:3]
+    the_time = val[3:6]
+    sub_date = '20'
+    sub_time = ' '
+    count = 0
+    for item in date:
+        sub_date += str(item)
+        if count < 2:
+            sub_date += '-'
+        count += 1
+
+    count = 0
+    for item in the_time:
+        sub_time += str(item)
+        if count < 2:
+            sub_time += ':'
+        count += 1
+    datetime = sub_date + sub_time
+    return datetime
+
+
+def to_sec(val):
+    sec = time.mktime(time.strptime(val, '%Y-%m-%d %H:%M:%S'))
+    temp = int(sec)
+    return str(temp)
+
+
+def to_timestamp(val):
+    temp = to_datetime(val)
+    return to_sec(temp)
+
+
 if __name__ == '__main__':
     sample1 = (127, 2)
     print is_subpackage(sample1)
@@ -67,7 +101,14 @@ if __name__ == '__main__':
     print is_encryption(sample2)
 
     print '----------Test dec2hex----------------'
-    sample3 = (22, 1, 5, 8, 82)
+    sample3 = (22, 1, 5, 17, 64, 25)
     result3 = to_bcd(sample3)
     print 'old      :', sample3
     print 'new      :', result3
+    #
+    print '----------Test to_datetime------------'
+    new_datetime = to_datetime(result3)
+    print 'new      :', new_datetime
+
+    print '----------Test to_sec ----------------'
+    print 'the sec      :', to_sec(new_datetime)
