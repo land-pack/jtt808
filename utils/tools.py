@@ -109,17 +109,25 @@ def to_dword(val):
     return result
 
 
-def to_position(val):
+def to_double_word(val):
     a_value = to_dword(val)
     temp = float(a_value)
     ret = temp / 1000000
     return ret
 
-def to_altitude(val):
+
+def to_a_word(val):
     a_value = to_dword(val)
     temp = float(a_value)
     ret = temp
     return ret
+
+
+def is_double_word(val):
+    if len(val) == 4:
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':
@@ -149,14 +157,14 @@ if __name__ == '__main__':
 
     print '----------Test to_position------------'
     print 'old      :', sample5
-    print 'new      :', to_position(sample5)
+    print 'new      :', to_double_word(sample5)
 
     print '---------Test to_position-----------'
     sample6 = (6, 168, 93, 143)
     print 'old      :', sample6
-    print 'new      :', to_position(sample6)
+    print 'new      :', to_double_word(sample6)
 
     print '---------Test to_altitude----------'
     sample7 = (4, 89)
     print 'old      :', sample7
-    print 'new      :', to_altitude(sample7)
+    print 'new      :', to_a_word(sample7)
