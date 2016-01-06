@@ -1,8 +1,10 @@
-class SplitModel:
+class SplitBase:
     """
     split_list = {} is dict,the subclass must override it !
-
+    What are the fields that are processed,decide which *_call
+    you have put into!
     """
+    # Required override
     split_list = {}
 
     def __init__(self, val):
@@ -11,6 +13,7 @@ class SplitModel:
         :return:
         """
         self.result = {}
+
         if not self.split_list:  # if the subclass no override it, raise a valueError exception!
             raise ValueError("The split_list can't empty!")
         else:
@@ -21,11 +24,14 @@ class SplitModel:
                 base_index = split_range
 
 
-class SubClass(SplitModel):
-    split_list = {'abc': 2, 'def': 3, 'ghi': 3}
+class SubClassSample(SplitBase):
+    """
+    You required override the split_list!
+    """
+    split_list = {'dev_id': 2, 'tie': 3, 'ghi': 4, 'time': 6}
 
 
 if __name__ == '__main__':
-    sample1 = (1, 2, 3, 4, 5, 6, 7, 8)
-    instance1 = SubClass(sample1)
+    sample1 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 22, 1, 5, 17, 64, 25)
+    instance1 = SubClassSample(sample1)
     print instance1.result

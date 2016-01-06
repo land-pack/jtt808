@@ -1,5 +1,6 @@
 from shortcuts.template import render
 from app.split import PositionSplit
+from app.admin import ConvertBaseRegister
 
 
 def register(val):
@@ -21,9 +22,12 @@ def auth(val):
 def position(val):
     content = val['client_content']
     position_instance = PositionSplit(content)
-    for item in position_instance.hash_data:
-        print 'key[%s]              value[%s]' % (item, position_instance.hash_data[item])
-   
+    ConvertBaseRegister(position_instance)
+
+    for item in position_instance:
+        print 'key[%s]              value[%s]' % (item, position_instance[item])
+
+
 if __name__ == '__main__':
     """
     The below sample dicts just for test the register!

@@ -4,7 +4,6 @@ Like example (1,2) become 0000 0001 0000 0010
 and the digist should be :512+2=514
 """
 from utils.check_code import check
-import time
 
 
 def is_subpackage(val):
@@ -47,8 +46,9 @@ def is_complete(val, std):
         return False
 
 
-def to_bcd(val):
+def dec2hex4tuple(val):
     """
+    :rtype: object
     :param val: a tuple ,which include decimal number!
     :return: a tuple ,which include hex number!
     """
@@ -57,41 +57,7 @@ def to_bcd(val):
         temp_item = hex(item).replace('0x', '')
         temp_save = int(temp_item)
         temp.append(temp_save)
-
     return tuple(temp)
-
-
-def to_datetime(val):
-    date = val[0:3]
-    the_time = val[3:6]
-    sub_date = '20'
-    sub_time = ' '
-    count = 0
-    for item in date:
-        sub_date += str(item)
-        if count < 2:
-            sub_date += '-'
-        count += 1
-
-    count = 0
-    for item in the_time:
-        sub_time += str(item)
-        if count < 2:
-            sub_time += ':'
-        count += 1
-    datetime = sub_date + sub_time
-    return datetime
-
-
-def to_sec(val):
-    sec = time.mktime(time.strptime(val, '%Y-%m-%d %H:%M:%S'))
-    temp = int(sec)
-    return str(temp)
-
-
-def to_timestamp(val):
-    temp = to_datetime(val)
-    return to_sec(temp)
 
 
 def to_dword(val):
@@ -109,7 +75,7 @@ def to_dword(val):
     return result
 
 
-def to_double_word(val):
+def to_double_word_fun(val):
     """
     :param val: a tuple (2, 110, 226, 147)
     :return: (38.0000 ~ 42.00000)
@@ -120,13 +86,13 @@ def to_double_word(val):
     return ret
 
 
-def to_int_dword(val):
+def to_int_dword_fun(val):
     a_value = to_dword(val)
     temp = int(a_value)
     return temp
 
 
-def to_a_word(val):
+def to_a_word_fun(val):
     """
     :param val: a tuple with two element (2, 110)
     :return:
@@ -142,40 +108,23 @@ if __name__ == '__main__':
     sample2 = (1023, 0)
     print is_encryption(sample2)
 
-    print '----------Test dec2hex----------------'
-    sample3 = (22, 1, 5, 17, 64, 25)
-    result3 = to_bcd(sample3)
-    print 'old      :', sample3
-    print 'new      :', result3
-    #
-    print '----------Test to_datetime------------'
-    new_datetime = to_datetime(result3)
-    print 'new      :', new_datetime
-
-    print '----------Test to_sec ----------------'
-    print 'the sec      :', to_sec(new_datetime)
-
     print '----------Test to_dword --------------'
     sample5 = (2, 110, 226, 147)
     sample5x = to_dword(sample5)
     print 'old      :', sample5
     print 'new      :', sample5x
 
-    print '----------Test to_position------------'
-    print 'old      :', sample5
-    print 'new      :', to_double_word(sample5)
-
     print '---------Test to_position-----------'
     sample6 = (6, 168, 93, 143)
     print 'old      :', sample6
-    print 'new      :', to_double_word(sample6)
+    print 'new      :', to_double_word_fun(sample6)
 
     print '---------Test to_altitude----------'
     sample7 = (4, 89)
     print 'old      :', sample7
-    print 'new      :', to_a_word(sample7)
+    print 'new      :', to_a_word_fun(sample7)
 
     print '---------Test to_int_dword---------'
     sample8 = (6, 168)
     print 'old      :', sample8
-    print 'new      :', to_int_dword(sample8)
+    print 'new      :', to_int_dword_fun(sample8)

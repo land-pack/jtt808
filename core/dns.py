@@ -1,7 +1,7 @@
 import struct
 import binascii
 from ast import literal_eval
-from utils.tools import to_bcd
+from utils.tools import dec2hex4tuple
 
 
 def dns(val):
