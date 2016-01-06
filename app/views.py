@@ -24,8 +24,8 @@ def position(val):
     position_instance = PositionSplit(content)
     ConvertBaseRegister(position_instance.result)
 
-    for item in position_instance:
-        print 'key[%s]              value[%s]' % (item, position_instance[item])
+    for item in position_instance.result:
+        print 'key[%s]              value[%s]' % (item, position_instance.result[item])
 
 
 if __name__ == '__main__':
