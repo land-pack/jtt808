@@ -22,7 +22,11 @@ def to_2_tuple(val):
 def to_fixed_dict(val):
     item = val.split('/')
     result = {}
-    result[item[0]] = int(item[1])
+    if '~' in item[1]:
+        range_to = item[1].split('~')
+        result[item[0]] = [int(x) for x in range_to]  # Very nice code
+    else:
+        result[item[0]] = int(item[1])
     return result
 
 
@@ -33,7 +37,7 @@ if __name__ == '__main__':
     )
     print example1
 
-    example2 = ['dev_id/2', 'tie/3', 'ghi/4', 'time/4']
+    example2 = ['dev_id/2~3', 'tie/3', 'ghi/4', 'time/4']
     for index in range(len(example2)):
         print to_fixed_dict(example2[index])
 

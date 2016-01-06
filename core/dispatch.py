@@ -7,6 +7,7 @@ from utils.tools import is_encryption
 from utils.tools import is_complete
 from conf.protocols import MSG_ID
 from app.urls import urlpatterns
+from core.split import SplitBase
 import tongue
 
 """
@@ -25,6 +26,12 @@ def reflect(flag, request):
     """
     return urlpatterns[flag](request)
 
+# class MainSplit(SplitBase):
+#     # override the parent attribute
+#     prefix = 'client_'
+#     split_list = ['head_tag/1', 'msg_id/2', 'msg_attr/2',
+#                   'dev_id/6', 'msg_product/2', 'spe/2',
+#                   'direction/2', 'timestamp/6']
 
 class Split:
     """
@@ -64,19 +71,6 @@ class Split:
         else:
             print 'val is no valid data'
 
-    def show(self):
-        if self.debug:
-            print 'self.tag         :', self.tag
-            print 'self.msg_id      :', self.msg_id
-            print 'self.msg_attr    :', self.msg_attr
-            print 'self.dev_id      :', self.dev_id
-            print 'self.msg_product :', self.msg_product
-            print 'self.content     :', self.content
-            print 'self.crc         :', self.crc
-            print 'self.end_tag     :', self.end_tag
-        else:
-            print 'There are no assign! because the crc have no right!'
-
 
 class Dispatch:
     """
@@ -102,7 +96,6 @@ class Dispatch:
             self.distribute()
         else:
             print 'Can publish your data!'
-            # self.show()
 
     def resolution(self):
         """
