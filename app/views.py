@@ -22,7 +22,7 @@ def auth(val):
 def position(val):
     content = val['client_content']
     position_instance = PositionSplit(content)
-    ConvertBaseRegister(position_instance)
+    ConvertBaseRegister(position_instance.result)
 
     for item in position_instance:
         print 'key[%s]              value[%s]' % (item, position_instance[item])

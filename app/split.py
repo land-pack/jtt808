@@ -3,12 +3,9 @@ from core.split import SplitBase
 
 class PositionSplit(SplitBase):
     # override the parent attribute
-    split_list = {'alarm': 4, 'status': 4, 'latitude': 4,
-                  'longitude': 4, 'altitude': 2, 'speed': 2,
-                  'direction': 2, 'timestamp': 6
-                  }
-
-
+    split_list = ['alarm/4', 'status/4', 'latitude/4',
+                  'longitude/4', 'altitude/2', 'speed/2',
+                  'direction/2', 'timestamp/6']
 
 
 if __name__ == '__main__':

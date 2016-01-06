@@ -1,3 +1,6 @@
+from core.urls import to_fixed_dict
+
+
 class SplitBase:
     """
     split_list = {} is dict,the subclass must override it !
@@ -18,9 +21,11 @@ class SplitBase:
             raise ValueError("The split_list can't empty!")
         else:
             base_index = 0
-            for key in self.split_list:
-                split_range = base_index + self.split_list[key]
-                self.result[key] = val[base_index:split_range]
+            for index in range(len(self.split_list)):
+                current_field_length_dict = to_fixed_dict(self.split_list[index])
+                for item in current_field_length_dict:
+                    split_range = base_index + current_field_length_dict[item]
+                self.result[item] = val[base_index:split_range]
                 base_index = split_range
 
 
@@ -28,7 +33,8 @@ class SubClassSample(SplitBase):
     """
     You required override the split_list!
     """
-    split_list = {'dev_id': 2, 'tie': 3, 'ghi': 4, 'time': 6}
+    # split_list = {'dev_id': 2, 'tie': 3, 'ghi': 4, 'time': 6}
+    split_list = ['dev_id/2', 'tie/3', 'ghi/4', 'time/4']
 
 
 if __name__ == '__main__':
