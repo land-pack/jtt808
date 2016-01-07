@@ -71,21 +71,9 @@ class Dispatch:
         """
         self.request_data = tongue.Decode(self.request)
         self.client_tuple_data = self.request_data.dst  # Don't forget get dst attribute
-        # self.hex_format_data = dec2hex(self.client_tuple_data)
-        # self.rec_data = Split(self.client_tuple_data)
         self.split_instance = MainSplit(self.client_tuple_data)
         self.request_dict = self.split_instance.result
         if self.split_instance.debug:
-            # self.request_dict = {
-            #     'client_msg_id': self.rec_data.msg_id,
-            #     'client_msg_attr': self.rec_data.msg_attr,
-            #     'client_dev_id': self.rec_data.dev_id,
-            #     'client_msg_product': self.rec_data.msg_product,
-            #     'client_content': self.rec_data.content,
-            #     'client_crc': self.rec_data.crc,
-            #     'GET': self.conn  # For response the socket
-            #
-            # }
             self.request_dict['GET'] = self.conn
             self.msg_key = str(self.request_dict['client_msg_id'])
         else:

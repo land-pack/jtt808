@@ -24,7 +24,7 @@ def position(val):
     position_instance = PositionSplit(content)
     result_dict = position_instance.result
     ConvertBaseRegister(result_dict)
-
+    # Save to db if you want! here you going!
     for item in position_instance.result:
         print 'key[%s]              value[%s]' % (item, result_dict[item])
 
