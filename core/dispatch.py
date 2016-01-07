@@ -114,7 +114,8 @@ class Dispatch:
         self.client_tuple_data = self.request_data.dst  # Don't forget get dst attribute
         # self.hex_format_data = dec2hex(self.client_tuple_data)
         # self.rec_data = Split(self.client_tuple_data)
-        self.rec_data = MainSplit(self.client_tuple_data).result
+        self.rec_data = MainSplit(self.client_tuple_data)
+        self.request_dict = self.rec_data.result
         if self.rec_data.debug:
             # self.request_dict = {
             #     'client_msg_id': self.rec_data.msg_id,
@@ -127,7 +128,7 @@ class Dispatch:
             #
             # }
             self.rec_data['GET'] = self.conn
-            self.msg_key = str(self.rec_data['client_msg_id'])
+            self.msg_key = str(self.request_dict['client_msg_id'])
         else:
             print 'No Split instance !'
             self.PUB = False
