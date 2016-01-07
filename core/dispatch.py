@@ -91,7 +91,7 @@ class Dispatch:
         self.request_data = None
         self.client_tuple_data = None
         self.hex_format_data = None
-        self.rec_data = None
+        self.split_instance = None
         self.msg_key = None
         self.menu_key = None  # Just a key of urlpatterns Dicts
         self.request_dict = None
@@ -114,9 +114,9 @@ class Dispatch:
         self.client_tuple_data = self.request_data.dst  # Don't forget get dst attribute
         # self.hex_format_data = dec2hex(self.client_tuple_data)
         # self.rec_data = Split(self.client_tuple_data)
-        self.rec_data = MainSplit(self.client_tuple_data)
-        self.request_dict = self.rec_data.result
-        if self.rec_data.debug:
+        self.split_instance = MainSplit(self.client_tuple_data)
+        self.request_dict = self.split_instance.result
+        if self.split_instance.debug:
             # self.request_dict = {
             #     'client_msg_id': self.rec_data.msg_id,
             #     'client_msg_attr': self.rec_data.msg_attr,
@@ -151,7 +151,7 @@ class Dispatch:
 
         if self.msg_key in self.protocol:
             self.menu_key = self.protocol[self.msg_key]
-            reflect(self.menu_key, self.rec_data)
+            reflect(self.menu_key, self.request_dict)
             return True
 
         else:

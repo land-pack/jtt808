@@ -40,7 +40,6 @@ class ConvertBase:
         for func_key in self.convert_to_function:  # Get the static function name
             convert_to_func = self.convert_to_function[func_key]  # Get the static function instance
             convert_lists = self.convert_to_func_arg[func_key]  # Get the target list for deal !
-            print 'func_arg', self.convert_to_func_arg
             for each_field in convert_lists:  # Get each item of the list
                 if each_field in val:
                     src_data = val[each_field]  # Get the each value from the user input which key is equal each_field!
