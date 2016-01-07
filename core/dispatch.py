@@ -26,12 +26,17 @@ def reflect(flag, request):
     """
     return urlpatterns[flag](request)
 
-# class MainSplit(SplitBase):
-#     # override the parent attribute
-#     prefix = 'client_'
-#     split_list = ['head_tag/1', 'msg_id/2', 'msg_attr/2',
-#                   'dev_id/6', 'msg_product/2', 'spe/2',
-#                   'direction/2', 'timestamp/6']
+
+class MainSplit(SplitBase):
+    # override the parent attribute
+    prefix = 'client_'
+    split_list = ['head_tag/1', 'msg_id/2', 'msg_attr/2',
+                  'dev_id/6', 'msg_product/2',
+                  'package_item/is_subpackage(msg_attr)?13~15:13~13',
+                  'content/is_subpackage(msg_attr)?15~-2:13~-2',
+                  'crc/-2~-1'
+                  ]
+
 
 class Split:
     """
@@ -108,21 +113,21 @@ class Dispatch:
         self.request_data = tongue.Decode(self.request)
         self.client_tuple_data = self.request_data.dst  # Don't forget get dst attribute
         # self.hex_format_data = dec2hex(self.client_tuple_data)
-        self.rec_data = Split(self.client_tuple_data)
-
+        # self.rec_data = Split(self.client_tuple_data)
+        self.rec_data = MainSplit(self.client_tuple_data)
         if self.rec_data.debug:
-            self.request_dict = {
-                'client_msg_id': self.rec_data.msg_id,
-                'client_msg_attr': self.rec_data.msg_attr,
-                'client_dev_id': self.rec_data.dev_id,
-                'client_msg_product': self.rec_data.msg_product,
-                'client_content': self.rec_data.content,
-                'client_crc': self.rec_data.crc,
-                'GET': self.conn  # For response the socket
-
-            }
-
-            self.msg_key = str(self.rec_data.msg_id)
+            # self.request_dict = {
+            #     'client_msg_id': self.rec_data.msg_id,
+            #     'client_msg_attr': self.rec_data.msg_attr,
+            #     'client_dev_id': self.rec_data.dev_id,
+            #     'client_msg_product': self.rec_data.msg_product,
+            #     'client_content': self.rec_data.content,
+            #     'client_crc': self.rec_data.crc,
+            #     'GET': self.conn  # For response the socket
+            #
+            # }
+            self.rec_data['GET'] = self.conn
+            self.msg_key = str(self.rec_data['client_msg_id'])
         else:
             print 'No Split instance !'
             self.PUB = False
@@ -156,4 +161,4 @@ if __name__ == '__main__':
     # Test the Split class
     sample1 = (126, 1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 43, 126)
     result = Split(sample1)
-    result.show()
+    print result.crc
