@@ -64,77 +64,53 @@ class SplitBase:
         self.result = {}  # The result of the SplitBase
         if not self.split_list:  # if the subclass no override it, raise a valueError exception!
             raise ValueError("The split_list can't empty!")
-        else:
-            base_index = 0
-            split_list_length = len(self.split_list)
-            if val:
+        if val:
+
+            if self.crc_check:
                 self.message_head_content = val[1:-1]
                 self.crc = val[-2]
-                if self.crc_check:
-                    if is_complete(self.message_head_content, self.crc):
-                        for index in range(split_list_length):
-                            spd = split_ruler(self.split_list[index])
-                            fill_field = self.prefix + spd['field']
-                            if 'fun' in spd:
-
-                                func_object_name = spd['fun']
-                                func_object = self.process_function[func_object_name]
-                                func_arg_field = self.prefix + spd['arg']
-                                func_arg = self.result[func_arg_field]  # Which field you need to checking of the result!
-                                if func_object(func_arg):
-                                    # if you return True ,pick the optA as it's field_range
-                                    field_range = spd['optA']
-                                else:
-                                    field_range = spd['optB']
-                            else:
-                                field_range = spd['optA']
-
-                            if isinstance(field_range, list):
-                                begin = field_range[0]
-                                end = field_range[1]
-                                field_value = val[begin:end]
-                                split_range = len(field_value)  # The length of the split
-                            else:
-                                split_range = base_index + field_range  # The field_range here we got a integer !
-                                field_value = val[base_index:split_range]
-
-                            base_index = split_range  # increase the index
-                            self.result[fill_field] = field_value
-                    else:
-                        # ignore this request from terminal device
-                        self.debug = False
-                        print 'No complete data from client!'
+                if is_complete(self.message_head_content, self.crc):
+                    self.build_dict(val)
                 else:
-                    for index in range(split_list_length):
-                        spd = split_ruler(self.split_list[index])
-                        fill_field = self.prefix + spd['field']
-                        if 'fun' in spd:
-
-                            func_object_name = spd['fun']
-                            func_object = self.process_function[func_object_name]
-                            func_arg_field = self.prefix + spd['arg']
-                            func_arg = self.result[func_arg_field]  # Which field you need to checking of the result!
-                            if func_object(func_arg):
-                                # if you return True ,pick the optA as it's field_range
-                                field_range = spd['optA']
-                            else:
-                                field_range = spd['optB']
-                        else:
-                            field_range = spd['optA']
-
-                        if isinstance(field_range, list):
-                            begin = field_range[0]
-                            end = field_range[1]
-                            field_value = val[begin:end]
-                            split_range = len(field_value)  # The length of the split
-                        else:
-                            split_range = base_index + field_range  # The field_range here we got a integer !
-                            field_value = val[base_index:split_range]
-
-                        base_index = split_range  # increase the index
-                        self.result[fill_field] = field_value
+                    # ignore this request from terminal device
+                    self.debug = False
+                    print 'No complete data from client!'
             else:
-                print 'No validation input!'
+                self.build_dict(val)
+        else:
+            print 'No validation input!'
+
+    def build_dict(self, val):
+        base_index = 0
+        split_list_length = len(self.split_list)
+
+        for index in range(split_list_length):
+            spd = split_ruler(self.split_list[index])
+            fill_field = self.prefix + spd['field']
+            if 'fun' in spd:
+                func_object_name = spd['fun']
+                func_object = self.process_function[func_object_name]
+                func_arg_field = self.prefix + spd['arg']
+                func_arg = self.result[func_arg_field]  # Which field you need to checking of the result!
+                if func_object(func_arg):
+                    # if you return True ,pick the optA as it's field_range
+                    field_range = spd['optA']
+                else:
+                    field_range = spd['optB']
+            else:
+                field_range = spd['optA']
+
+            if isinstance(field_range, list):
+                begin = field_range[0]
+                end = field_range[1]
+                field_value = val[begin:end]
+                split_range = len(field_value)  # The length of the split
+            else:
+                split_range = base_index + field_range  # The field_range here we got a integer !
+                field_value = val[base_index:split_range]
+
+            base_index = split_range  # increase the index
+            self.result[fill_field] = field_value
 
 
 class SubClassSample(SplitBase):
@@ -142,7 +118,7 @@ class SubClassSample(SplitBase):
     You required override the split_list!
     """
     # split_list = {'dev_id': 2, 'tie': 3, 'ghi': 4, 'time': 6}
-    split_list = ['dev_id/2', 'tie/2~5', 'ghi/4~-2', 'time/1']
+    split_list = ['dev_id/2', 'tie/2~4', 'ghi/4~-2', 'time/1']
     # prefix = 'ak'
 
 
