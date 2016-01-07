@@ -160,5 +160,5 @@ class Dispatch:
 if __name__ == '__main__':
     # Test the Split class
     sample1 = (126, 1, 0, 0, 2, 78, 56, 45, 34, 25, 78, 0, 1, 51, 52, 43, 126)
-    result = Split(sample1)
-    print result.crc
+    result = MainSplit(sample1)
+    print result.result
