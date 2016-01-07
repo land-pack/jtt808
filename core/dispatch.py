@@ -127,7 +127,7 @@ class Dispatch:
             #     'GET': self.conn  # For response the socket
             #
             # }
-            self.rec_data['GET'] = self.conn
+            self.request_dict['GET'] = self.conn
             self.msg_key = str(self.request_dict['client_msg_id'])
         else:
             print 'No Split instance !'
