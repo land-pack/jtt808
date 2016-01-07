@@ -114,7 +114,7 @@ class Dispatch:
         self.client_tuple_data = self.request_data.dst  # Don't forget get dst attribute
         # self.hex_format_data = dec2hex(self.client_tuple_data)
         # self.rec_data = Split(self.client_tuple_data)
-        self.rec_data = MainSplit(self.client_tuple_data)
+        self.rec_data = MainSplit(self.client_tuple_data).result
         if self.rec_data.debug:
             # self.request_dict = {
             #     'client_msg_id': self.rec_data.msg_id,
@@ -150,7 +150,7 @@ class Dispatch:
 
         if self.msg_key in self.protocol:
             self.menu_key = self.protocol[self.msg_key]
-            reflect(self.menu_key, self.request_dict)
+            reflect(self.menu_key, self.rec_data)
             return True
 
         else:
