@@ -22,10 +22,11 @@ def auth(val):
 def position(val):
     content = val['client_content']
     position_instance = PositionSplit(content)
-    ConvertBaseRegister(position_instance.result)
+    result_dict = position_instance.result
+    ConvertBaseRegister(result_dict)
 
     for item in position_instance.result:
-        print 'key[%s]              value[%s]' % (item, position_instance.result[item])
+        print 'key[%s]              value[%s]' % (item, result_dict[item])
 
 
 if __name__ == '__main__':

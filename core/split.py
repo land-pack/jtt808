@@ -46,6 +46,7 @@ class SplitBase:
     """
     # Required override
     split_list = {}
+    crc_check = False
     prefix = ''  # You can override it with your name if you like!
     process_function = {
         'is_subpackage': is_subpackage,
@@ -69,7 +70,41 @@ class SplitBase:
             if val:
                 self.message_head_content = val[1:-1]
                 self.crc = val[-2]
-                if is_complete(self.message_head_content, self.crc):
+                if self.crc_check:
+                    if is_complete(self.message_head_content, self.crc):
+                        for index in range(split_list_length):
+                            spd = split_ruler(self.split_list[index])
+                            fill_field = self.prefix + spd['field']
+                            if 'fun' in spd:
+
+                                func_object_name = spd['fun']
+                                func_object = self.process_function[func_object_name]
+                                func_arg_field = self.prefix + spd['arg']
+                                func_arg = self.result[func_arg_field]  # Which field you need to checking of the result!
+                                if func_object(func_arg):
+                                    # if you return True ,pick the optA as it's field_range
+                                    field_range = spd['optA']
+                                else:
+                                    field_range = spd['optB']
+                            else:
+                                field_range = spd['optA']
+
+                            if isinstance(field_range, list):
+                                begin = field_range[0]
+                                end = field_range[1]
+                                field_value = val[begin:end]
+                                split_range = len(field_value)  # The length of the split
+                            else:
+                                split_range = base_index + field_range  # The field_range here we got a integer !
+                                field_value = val[base_index:split_range]
+
+                            base_index = split_range  # increase the index
+                            self.result[fill_field] = field_value
+                    else:
+                        # ignore this request from terminal device
+                        self.debug = False
+                        print 'No complete data from client!'
+                else:
                     for index in range(split_list_length):
                         spd = split_ruler(self.split_list[index])
                         fill_field = self.prefix + spd['field']
@@ -98,10 +133,6 @@ class SplitBase:
 
                         base_index = split_range  # increase the index
                         self.result[fill_field] = field_value
-                else:
-                    # ignore this request from terminal device
-                    self.debug = False
-                    print 'No complete data from client!'
             else:
                 print 'No validation input!'
 
