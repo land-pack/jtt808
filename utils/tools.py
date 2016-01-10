@@ -1,7 +1,7 @@
 """
 some tool work for batter
 Like example (1,2) become 0000 0001 0000 0010
-and the digist should be :512+2=514
+and the digit should be :512+2=514
 """
 from utils.check_code import check
 

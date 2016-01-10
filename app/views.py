@@ -3,6 +3,9 @@ from app.split import PositionSplit
 from app.admin import ConvertBaseRegister
 
 
+# You can write your logic here, and it's you place!
+# You can do save & custom response message if you want!
+# And you also can ignore all request just like the position view!
 def register(val):
     """
     :param val: original data format to Dicts from terminal!
@@ -21,12 +24,12 @@ def auth(val):
 
 def position(val):
     content = val['client_content']
-    position_instance = PositionSplit(content)
-    result_dict = position_instance.result
-    ConvertBaseRegister(result_dict)
+    position_instance = PositionSplit(content)  # Split the position context if the protocol !
+    result_dict = position_instance.result  # you got dict type
+    ConvertBaseRegister(result_dict)  # Convert the client request data to the new data!
     # Save to db if you want! here you going!
     for item in position_instance.result:
-        print 'key[%s]              value[%s]' % (item, result_dict[item])
+        print '%s           : %s' % (item, result_dict[item])
 
 
 if __name__ == '__main__':

@@ -2,6 +2,7 @@ import views
 from core.urls import pattern
 
 """
+the urls control where are the request goes!
 dispatch method will return a Dicts to urlpatterns
 and then,you can call 'view.register' by nickname 'register'
 """

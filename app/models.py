@@ -20,9 +20,17 @@ class Cookie(Base):
     unit_cost = Column(Numeric(12, 2))
 
 
-# class Register(Base):
-#    __tablename__ = 'register'
+class PositionTable(Base):
+    __tablename__ = 'register'
 
+    alarm = Column(Integer)
+    status = Column(Integer)
+    latitude = Column(Integer)
+    longitude = Column(Integer)
+    altitude = Column(Integer)
+    speed = Column(Integer)
+    direction = Column(Integer)
+    timestamp = Column(Integer)
 
 
 Base.metadata.create_all(engine)
