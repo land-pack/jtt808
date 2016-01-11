@@ -4,6 +4,10 @@ from app.admin import ConvertBaseRegister
 
 from app.models import PositionTable
 from app.models import session
+from app.models import Base, engine
+
+Base.metadata.create_all(engine)
+
 
 # You can write your logic here, and it's you place!
 # You can do save & custom response message if you want!
