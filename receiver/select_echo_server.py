@@ -8,7 +8,7 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setblocking(0)
 
 # Bind the socket to the port
-server_address = ('localhost', 7777)
+server_address = ('localhost', 7779)
 print >> sys.stderr, 'starting up on %s port %s' % server_address
 server.bind(server_address)
 
@@ -49,15 +49,15 @@ while inputs:
             data = s.recv(1024)
             if data:
                 # A readable client socket has data
-                print sys.stderr, ' received "%s" from %s' % \
-                                  (data, s.getpeername())
+                print >> sys.stderr, ' received "%s" from %s' % \
+                                     (data, s.getpeername())
                 message_queues[s].put(data)
                 # Add output channel for response
                 if s not in outputs:
                     outputs.append(s)
             else:
                 # Interpret empty result as closed connection
-                print sys.stderr, ' closing', client_address
+                print >> sys.stderr, ' closing', client_address
                 # Stop listening for input on the connection
                 if s in outputs:
                     outputs.remove(s)

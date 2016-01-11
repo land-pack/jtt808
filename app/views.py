@@ -2,6 +2,14 @@ from shortcuts.template import render
 from app.split import PositionSplit
 from app.admin import ConvertBaseRegister
 
+from sqlalchemy.orm import sessionmaker
+from app.models import PositionTable
+from app.models import engine
+
+Base.metadata.bind = engine
+DBSession = sessionmaker
+session = DBSession()
+
 
 # You can write your logic here, and it's you place!
 # You can do save & custom response message if you want!
@@ -30,6 +38,11 @@ def position(val):
     # Save to db if you want! here you going!
     for item in position_instance.result:
         print '%s           : %s' % (item, result_dict[item])
+    position_info = position_instance.result
+    p_i = PositionTable(**position_info)
+    session.add(p_i)
+    session.commit()
+    # session.close()
 
 
 if __name__ == '__main__':
