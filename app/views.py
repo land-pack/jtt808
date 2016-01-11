@@ -2,14 +2,8 @@ from shortcuts.template import render
 from app.split import PositionSplit
 from app.admin import ConvertBaseRegister
 
-from sqlalchemy.orm import sessionmaker
 from app.models import PositionTable
-from app.models import engine
-
-Base.metadata.bind = engine
-DBSession = sessionmaker
-session = DBSession()
-
+from app.models import session
 
 # You can write your logic here, and it's you place!
 # You can do save & custom response message if you want!

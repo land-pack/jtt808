@@ -7,9 +7,13 @@ from sqlalchemy.orm import relationships
 
 engine = create_engine('mysql://root:tianxunceshi@localhost:3306/sqlalchemy_demo')
 # engine = create_engine("mysql:///:memory:")
-Session = sessionmaker(bind=engine)
-session = Session()
+# Session = sessionmaker(bind=engine)
+# session = Session()
 Base = declarative_base()
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
+session = DBSession()   # For view import ...
+Base.metadata.create_all(engine)
 
 
 # class Cookie(Base):
@@ -35,7 +39,6 @@ class PositionTable(Base):
     timestamp = Column(Integer)
 
 
-Base.metadata.create_all(engine)
 
 if __name__ == '__main__':
     # cc_cookie = Cookie(cookie_name='google',
