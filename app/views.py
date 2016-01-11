@@ -40,7 +40,6 @@ def position(val):
     p_i = PositionTable(**position_info)
     session.add(p_i)
     session.commit()
-    # session.close()
 
 
 if __name__ == '__main__':
