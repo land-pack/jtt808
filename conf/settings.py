@@ -7,6 +7,8 @@ NUM_OF_CODE = 8
 The IP_PORT is for socket work fine!
 """
 IP_PORT = ('0.0.0.0', 5555)
+IP = '0.0.0.0'
+PORT = 5555
 
 """
 The

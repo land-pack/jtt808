@@ -1,20 +1,21 @@
 import asyncore
 import socket
 from core.dispatch import Dispatch
+from visual.visual_decorator import info
+from conf.settings import IP, PORT
 
 
 class Adapt:
-    def __init__(self, send, data):
-        self.sendall = send
-        self.data = data
-        Dispatch(send, data)
+    def __init__(self, send_desc):
+        self.sendall = send_desc  # For Adapt socket sendall() method
 
 
 class EchoHandler(asyncore.dispatcher_with_send):
     def handle_read(self):
         data = self.recv(8192)
         if data:
-            Adapt(self.send, data)
+            conn = Adapt(self.send)  # Now your conn have method sendall()
+            Dispatch(data, conn)
 
 
 class EchoServer(asyncore.dispatcher):
@@ -29,9 +30,11 @@ class EchoServer(asyncore.dispatcher):
         pair = self.accept()
         if pair is not None:
             sock, addr = pair
-            print 'Incoming connection from %s' % repr(addr)
+            info_tips = 'Incoming connection from %s' + repr(addr)
+            info(info_tips)
             handler = EchoHandler(sock)
 
 
-server = EchoServer('0.0.0.0', 5555)
-asyncore.loop()
+if __name__ == '__main__':
+    server = EchoServer(IP, PORT)
+    asyncore.loop()
