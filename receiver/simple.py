@@ -1,5 +1,8 @@
 import asyncore
 import socket
+import sys
+
+sys.path.append("..")
 from core.dispatch import Dispatch
 from visual.visual_decorator import info
 from conf.settings import IP, PORT

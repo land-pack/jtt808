@@ -5,9 +5,9 @@ def display_color(color_name='red'):
     def _display_color(function_name):
         def __display_color(output_string):
             print '\033[1;%s;40m' % color[color_name]
-            print '*' * 50
+            print '*' * 80
             function_name(output_string)
-            print '*' * 50
+            print '*' * 80
             print '\033[0m'
 
         return __display_color
