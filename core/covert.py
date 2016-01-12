@@ -2,7 +2,7 @@ from utils.timestamp import to_timestamp_fun  # (22, 1, 5, 17, 64, 25) --> 14519
 from utils.tools import to_double_word_fun  # (2, 110, 226, 147) --> 40.821395
 from utils.tools import to_a_word_fun  # (4, 89) --> 1113.0
 from utils.tools import to_int_dword_fun  # (6, 168) --> 1704
-
+from visual.visual_decorator import error
 
 # Example :
 def to_hello(val):
@@ -45,7 +45,7 @@ class ConvertBase:
                     src_data = val[each_field]  # Get the each value from the user input which key is equal each_field!
                     val[each_field] = convert_to_func(src_data)  # convert the result with new value!
                 else:
-                    print "The Key Does't match any field of val!"
+                    error("The Key Does't match any field of val!")
 
 
 class ConvertBaseSample(ConvertBase):

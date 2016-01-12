@@ -6,6 +6,7 @@ from conf.protocols import MSG_ID
 from app.urls import urlpatterns
 from core.split import SplitBase
 import tongue
+from visual.visual_decorator import error, warning
 
 """
 urlpatterns is a function Dicts,and it will automatic looking
@@ -59,7 +60,7 @@ class Dispatch:
         if self.PUB:
             self.distribute()
         else:
-            print 'Can publish your data!'
+            error("Can't publish your data!")
 
     def resolution(self):
         """
@@ -77,7 +78,7 @@ class Dispatch:
             self.request_dict['GET'] = self.conn
             self.msg_key = str(self.request_dict['client_msg_id'])
         else:
-            print 'No Split instance !'
+            warning('No Split instance !')
             self.PUB = False
 
     def distribute(self):
