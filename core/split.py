@@ -1,6 +1,7 @@
 from utils.tools import is_subpackage
 from utils.tools import is_encryption
 from utils.tools import is_complete
+from visual.visual_decorator import error
 import re
 
 
@@ -74,7 +75,7 @@ class SplitBase:
                 else:
                     # ignore this request from terminal device
                     self.debug = False
-                    print 'No complete data from client!'
+                    error('No complete data from client!')
             else:
                 self.build_dict(val)
         else:
