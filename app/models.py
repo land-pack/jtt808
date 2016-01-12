@@ -3,12 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Numeric, String, Integer, ForeignKey, Float
 from sqlalchemy.orm import relationships
-from conf.settings import DB_TYPE
-from conf.settings import DB_HOST
-from conf.settings import DB_USER
-from conf.settings import DB_PASSWORD
-from conf.settings import DB_PORT
-from conf.settings import DB_NAME
+from conf.settings import DB_TYPE, DB_HOST, DB_USER, DB_PASSWORD, DB_PORT, DB_NAME
 
 DB_INFO = '%s://%s:%s@%s:%i/%s' % (DB_TYPE, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
 engine = create_engine(DB_INFO)

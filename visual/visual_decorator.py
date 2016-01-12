@@ -1,48 +1,31 @@
 # Read color for error information!
-def yellow_decorate(f):
-    def wrapper(x):
-        print '\033[1;33;40m'
-        print '*' * 50
-        f(x)
-        print '*' * 50
-        print '\033[0m'
+def display_color(color_name='red'):
+    color = {'red': '31', 'blue': '34', 'yellow': '33'}
 
-    return wrapper
+    def _display_color(function_name):
+        def __display_color(output_string):
+            print '\033[1;%s;40m' % color[color_name]
+            print '*' * 50
+            function_name(output_string)
+            print '*' * 50
+            print '\033[0m'
 
+        return __display_color
 
-def blue_decorate(f):
-    def wrapper(x):
-        print '\033[1;34;40m'
-        print '*' * 50
-        f(x)
-        print '*' * 50
-        print '\033[0m'
-
-    return wrapper
+    return _display_color
 
 
-def red_decorate(f):
-    def wrapper(x):
-        print '\033[1;31;40m'
-        print '*' * 50
-        f(x)
-        print '*' * 50
-        print '\033[0m'
-
-    return wrapper
-
-
-@red_decorate
+@display_color('red')
 def error(val):
     print '[Error]\t', val
 
 
-@blue_decorate
+@display_color('blue')
 def info(val):
     print '[Info]\t', val
 
 
-@yellow_decorate
+@display_color('yellow')
 def warning(val):
     print '[Warn]\t', val
 
