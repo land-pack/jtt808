@@ -12,25 +12,26 @@ Base.metadata.create_all(engine)
 # You can write your logic here, and it's you place!
 # You can do save & custom response message if you want!
 # And you also can ignore all request just like the position view!
-def register(val):
+def register(terminal_request):
     """
-    :param val: original data format to Dicts from terminal!
+    :param terminal_request: original data format to Dicts from terminal!
     :return: a render which a tuple factory
     you should know what you are doing and which field you need!
     """
     template = 'client_msg_id|client_msg_attr|client_dev_id|client_msg_product|client_content'
-    return render(val, template)
+    return render(terminal_request, template)
 
 
-def auth(val):
+def auth(terminal_request):
     msg_content = 'client_msg_product|client_msg_id|sys_ok'
     template = 'ser_com_rsp|sys_fixed_msg_attr|client_dev_id|sys_product|' + msg_content
-    return render(val, template)
+    print 'terminal_request', terminal_request
+    return render(terminal_request, template)
 
 
-def position(val):
+def position(terminal_request):
     # Load the field which your need to save!
-    content = val['client_content']
+    content = terminal_request['client_content']
     # Do some Resolution according your need!
     position_instance = PositionSplit(content)
     # Get the attribute of the PositionSplit and you'll got a Dict type
@@ -39,6 +40,7 @@ def position(val):
     ConvertBaseRegister(result_dict)
     # Get the data with Dict format!
     position_info = position_instance.result
+    print 'position_info', position_info
     # Send to ORM & Save it to Data Base!
     p_i = PositionTable(**position_info)
     session.add(p_i)

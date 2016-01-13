@@ -6,7 +6,6 @@ sys.path.append("..")
 from core.dispatch import Dispatch
 from visual.visual_decorator import info
 from conf.settings import IP, PORT
-from visual.v_tips import load_data
 
 
 class Adapt:
@@ -19,7 +18,7 @@ class Adapt:
 
 
 class EchoHandler(asyncore.dispatcher_with_send):
-    self.data_len = 0
+    data_len = 0
 
     def handle_read(self):
         data = self.recv(8192)
@@ -50,7 +49,6 @@ class EchoServer(asyncore.dispatcher):
             self.current = handler.data_len
             self.total_recv += self.current
             self.counter += 1
-            load_data(self.total_recv, self.current, self.counter)
 
 
 if __name__ == '__main__':
