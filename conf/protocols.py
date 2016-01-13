@@ -14,6 +14,7 @@ SYSTEM_CMD = pattern(
         ('sys_auth', AUTH_CODE),
         ('sys_product', (0, 1)),
         ('sys_fixed_msg_attr', (0, 5))  # This is a fixed value ,you should calculate the msg attr yourself!
+        ('sys_fixed_msg_attr2', (0, 0))
 )
 
 """

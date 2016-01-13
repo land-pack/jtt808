@@ -48,7 +48,7 @@ def position(terminal_request):
 
 
 def get_ter_info(terminal_request):
-    template = 'get_ter_info|sys_fixed_msg_attr|client_dev_id|sys_product|'
+    template = 'get_ter_info|sys_fixed_msg_attr2|client_dev_id|sys_product|'
     print 'terminal_request', terminal_request
     return render(terminal_request, template)
 

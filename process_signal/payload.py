@@ -14,8 +14,11 @@ def hello(a, b):
     print '[1] Checking the terminal information'
     print '[2] Setting the terminal'
     print '[3] Do something else!'
+    print '[0] Reset!'
     cmd = raw_input('Please input cmd your :')
-    if cmd == 1:
+    if int(cmd) == 1:
         urlpatterns['position'] = views.get_ter_info
+    elif int(cmd) == 0:
+        urlpatterns['position'] = views.position
     else:
         print 'No match command!'

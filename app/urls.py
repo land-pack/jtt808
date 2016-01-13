@@ -10,7 +10,7 @@ urlpatterns = pattern(
         ('ser_reg_rsp', views.register),
         ('ter_aut_req', views.auth),
         ('position', views.position),
-        ('get_ter_info_rsp',views.terminal_info)
+        ('get_ter_info_rsp', views.terminal_info)
 )
 
 if __name__ == '__main__':
