@@ -30,6 +30,11 @@ def warning(val):
     print '[Warn]\t', val
 
 
+@display_color('cyan')
+def menu(val):
+    print 'Please input something:'
+
+
 if __name__ == '__main__':
     error("The data format error")
     warning("The data is not complete")

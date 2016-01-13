@@ -34,7 +34,8 @@ MSG_ID_ORIGINAL = pattern(
         ('0x0102', 'ter_aut_req'),
         ('0x8001', 'ser_com_rsp'),
         ('0x0200', 'position'),
-        ('0x8104', 'get_ter_info')
+        ('0x8104', 'get_ter_info'),
+        ('0x0104', 'get_ter_info_rsp')
 )
 
 """

@@ -47,6 +47,16 @@ def position(terminal_request):
     session.commit()
 
 
+def get_ter_info(terminal_request):
+    template = 'get_ter_info|sys_fixed_msg_attr|client_dev_id|sys_product|'
+    print 'terminal_request', terminal_request
+    return render(terminal_request, template)
+
+
+def terminal_info(terminal_request):
+    print 'Hey here is my terminal setting', terminal_request
+
+
 if __name__ == '__main__':
     """
     The below sample dicts just for test the register!
