@@ -83,8 +83,6 @@ class Dispatch:
 
         if self.split_instance.debug:
             self.request_dict['GET'] = self.conn
-            dev_key = self.request_dict['dev_id']
-            SOCKET_DESCRIPTOR[dev_key] = self.conn
             self.msg_key = str(self.request_dict['client_msg_id'])
         else:
             warning('No Split instance !')
