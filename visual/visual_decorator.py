@@ -1,6 +1,6 @@
 # Read color for error information!
 def display_color(color_name='red'):
-    color = {'red': '31', 'blue': '34', 'yellow': '33'}
+    color = {'red': '31', 'blue': '34', 'yellow': '33', 'cyan': '36'}
 
     def _display_color(function_name):
         def __display_color(output_string):
