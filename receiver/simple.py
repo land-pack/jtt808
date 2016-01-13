@@ -9,6 +9,9 @@ from conf.settings import IP, PORT
 
 
 class Adapt:
+    """
+    Just for make it's adapt suck.py & conn.sendall()
+    """
     def __init__(self, send_desc):
         self.sendall = send_desc  # For Adapt socket sendall() method
 

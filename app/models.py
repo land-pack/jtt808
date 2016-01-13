@@ -1,20 +1,41 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Numeric, String, Integer, ForeignKey, Float
-from sqlalchemy.orm import relationships
 from conf.settings import DB_TYPE, DB_HOST, DB_USER, DB_PASSWORD, DB_PORT, DB_NAME
+from visual.visual_decorator import error, info
 
-DB_INFO = '%s://%s:%s@%s:%i/%s' % (DB_TYPE, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
-engine = create_engine(DB_INFO)
+try:
+    import MySQLdb
 
-Base = declarative_base()
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()  # For view import ...
+    DB_INFO = '%s://%s:%s@%s:%i/%s' % (DB_TYPE, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME)
+except ImportError, msg:
+    error(msg)
+    info_msg = "Run 'sudo apt-get install mysql-python' to fixed this!"
+    info(info_msg)
+    DB_INFO = 'sqlite:///:memory:'
+
+try:
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker
+    from sqlalchemy.ext.declarative import declarative_base
+    from sqlalchemy import Column, Numeric, String, Integer, ForeignKey, Float
+    from sqlalchemy.orm import relationships
+
+    engine = create_engine(DB_INFO)
+    Base = declarative_base()
+    Base.metadata.bind = engine
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()  # For view import ...
+
+except ImportError, msg:
+    error(msg)
+    info_msg = "Run 'pip install sqlalchemy' to fixed this!"
+    info(info_msg)
+
 
 
 class PositionTable(Base):
+    """
+    Here is ORM framework ,As the below show.
+    each field reflect to your data base!
+    """
     __tablename__ = 'position_info'
 
     id = Column(Integer, primary_key=True)
@@ -29,4 +50,4 @@ class PositionTable(Base):
 
 
 if __name__ == '__main__':
-    pass
+    x = PositionTable()

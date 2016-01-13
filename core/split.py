@@ -79,7 +79,7 @@ class SplitBase:
             else:
                 self.build_dict(val)
         else:
-            print 'No validation input!'
+            error('No validation input!')
 
     def build_dict(self, val):
         base_index = 0

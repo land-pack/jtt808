@@ -29,14 +29,17 @@ def auth(val):
 
 
 def position(val):
+    # Load the field which your need to save!
     content = val['client_content']
-    position_instance = PositionSplit(content)  # Split the position context if the protocol !
-    result_dict = position_instance.result  # you got dict type
-    ConvertBaseRegister(result_dict)  # Convert the client request data to the new data!
-    # Save to db if you want! here you going!
-    for item in position_instance.result:
-        print '%s           : %s' % (item, result_dict[item])
+    # Do some Resolution according your need!
+    position_instance = PositionSplit(content)
+    # Get the attribute of the PositionSplit and you'll got a Dict type
+    result_dict = position_instance.result
+    # Convert the client request data to the new type if you need!
+    ConvertBaseRegister(result_dict)
+    # Get the data with Dict format!
     position_info = position_instance.result
+    # Send to ORM & Save it to Data Base!
     p_i = PositionTable(**position_info)
     session.add(p_i)
     session.commit()

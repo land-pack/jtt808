@@ -33,13 +33,14 @@ MSG_ID_ORIGINAL = pattern(
         ('0x8001', 'ser_com_rsp'),
         ('0x0200', 'position')
 )
+
+
 """
 change the MSG_ID_ORIGINAL Dicts key
 example1: 0x0100 --> (1,0)
 example2: 0100 --> (1,2)
 """
 MSG_ID = dns_key(MSG_ID_ORIGINAL)
-
 SYS_ID = dns_k2v(MSG_ID)
 
 if __name__ == '__main__':

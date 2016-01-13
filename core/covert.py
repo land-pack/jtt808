@@ -49,6 +49,11 @@ class ConvertBase:
 
 
 class ConvertBaseSample(ConvertBase):
+    """
+    If you to do some change with the data type
+    just override some attribute with prefix
+    convert_to_XXX_code ..
+    """
     convert_to_hello_code = ['bye', 'hey']
 
 

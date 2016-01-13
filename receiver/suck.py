@@ -1,7 +1,12 @@
+"""
+When you run python suck.py on your current path,it's will
+only work for test! You should know it's work on block,so
+never ever let it work on your finally product !
+"""
+
 import socket
 import sys
 from visual.visual_decorator import info, warning
-
 sys.path.append("..")
 # from dispatch_sample import dispatch_sample
 from core.dispatch import Dispatch
@@ -12,7 +17,6 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the part
 server_address = IP_PORT
-# server_address = ('0.0.0.0', 9909)
 info_self = 'starting up on %s port ' + str(server_address)
 info(info_self)
 sock.bind(server_address)

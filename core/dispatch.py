@@ -5,8 +5,13 @@ it destination!
 from conf.protocols import MSG_ID
 from app.urls import urlpatterns
 from core.split import SplitBase
-import tongue
-from visual.visual_decorator import error, warning
+from visual.visual_decorator import error, warning, info
+
+try:
+    import tongue
+except ImportError, msg:
+    error(msg)
+    info_msg = "Run 'pip install tongue' will fix this!"
 
 """
 urlpatterns is a function Dicts,and it will automatic looking
