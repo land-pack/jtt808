@@ -25,15 +25,17 @@ reg     : register
 aut     : authentication
 loc     : location
 com     : commonly
+get     : get
+info    : information
 """
 MSG_ID_ORIGINAL = pattern(
         ('0x0100', 'ter_reg_req'),
         ('0x8100', 'ser_reg_rsp'),
         ('0x0102', 'ter_aut_req'),
         ('0x8001', 'ser_com_rsp'),
-        ('0x0200', 'position')
+        ('0x0200', 'position'),
+        ('0x8104', 'get_ter_info')
 )
-
 
 """
 change the MSG_ID_ORIGINAL Dicts key
@@ -44,7 +46,6 @@ MSG_ID = dns_key(MSG_ID_ORIGINAL)
 SYS_ID = dns_k2v(MSG_ID)
 
 if __name__ == '__main__':
-
     print 'MSG_ID       :', MSG_ID
     print 'SYSTEM_CMD   :', SYSTEM_CMD
     print 'SYS_ID       :', SYS_ID

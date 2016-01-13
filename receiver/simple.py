@@ -1,11 +1,13 @@
 import asyncore
 import socket
 import sys
+import signal
 
 sys.path.append("..")
 from core.dispatch import Dispatch
 from visual.visual_decorator import info
 from conf.settings import IP, PORT
+from process_signal.payload import hello
 
 
 class Adapt:
@@ -53,4 +55,5 @@ class EchoServer(asyncore.dispatcher):
 
 if __name__ == '__main__':
     server = EchoServer(IP, PORT)
+    signal.signal(signal.SIGTSTP, hello)
     asyncore.loop()

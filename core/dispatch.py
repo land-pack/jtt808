@@ -2,10 +2,11 @@
 According the message id,this function will dispatch each to
 it destination!
 """
-from conf.protocols import MSG_ID
+from conf.protocols import MSG_ID   # A Global Dicts
 from app.urls import urlpatterns
 from core.split import SplitBase
 from visual.visual_decorator import error, warning, info
+from conf.rest import SOCKET_DESCRIPTOR  # A Global Dicts
 
 try:
     import tongue
@@ -79,8 +80,10 @@ class Dispatch:
         self.client_tuple_data = self.request_data.dst  # Don't forget get dst attribute
         self.split_instance = MainSplit(self.client_tuple_data)
         self.request_dict = self.split_instance.result
+
         if self.split_instance.debug:
             self.request_dict['GET'] = self.conn
+            SOCKET_DESCRIPTOR[self.request_dict['dev_id']] = self.conn
             self.msg_key = str(self.request_dict['client_msg_id'])
         else:
             warning('No Split instance !')
