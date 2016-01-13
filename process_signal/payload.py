@@ -9,7 +9,6 @@ from app.urls import urlpatterns
 from app import views
 
 
-@display_color('cyan')
 def hello(a, b):
     print '[1] Checking the terminal information'
     print '[2] Setting the terminal'
