@@ -16,10 +16,8 @@ def hello(a, b):
     print '[1] Checking the terminal information'
     print '[2] Checking the terminal attribute'
     print '[3] Do something else!'
-    print '-' * 80
     print '[0] Reset!'
     print '=' * 80
-    print '-'
     cmd = raw_input('Please input cmd your :')
     if int(cmd) == 1:
         urlpatterns['position'] = views.get_ter_info
