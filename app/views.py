@@ -57,6 +57,17 @@ def terminal_info(terminal_request):
     print 'Hey here is my terminal setting', terminal_request
 
 
+def get_ter_attr(terminal_request):
+    msg_content = ''  # Empty message content for checking terminal attribute
+    template = 'get_ter_attr|sys_fixed_msg_attr2|client_dev_id|sys_product|'
+    return render(terminal_request, template)
+
+
+def terminal_attr(terminal_request):
+    # Just print the terminal response for now!
+    print "Hey! It's terminal attribute", terminal_request
+
+
 if __name__ == '__main__':
     """
     The below sample dicts just for test the register!
