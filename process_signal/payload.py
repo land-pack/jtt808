@@ -9,7 +9,7 @@ from app.urls import urlpatterns
 from app import views
 
 
-@display_color_two
+@display_color_two('cyan')
 def hello(a, b):
     print ''
     print '=' * 80
