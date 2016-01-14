@@ -1,5 +1,6 @@
 from shortcuts.template import render
 from app.split import PositionSplit
+from app.split import TerminalAttributeSplit
 from app.admin import ConvertBaseRegister
 
 from app.models import PositionTable
@@ -66,6 +67,12 @@ def get_ter_attr(terminal_request):
 def terminal_attr(terminal_request):
     # Just print the terminal response for now!
     print "Hey! It's terminal attribute", terminal_request
+    # Load the field which your need to save!
+    content = terminal_request['client_content']
+    ter_attr_instance = TerminalAttributeSplit(content)
+    # Get the attribute of the PositionSplit and you'll got a Dict type
+    result_dict = ter_attr_instance.result
+    print 'result_dict', result_dict
 
 
 if __name__ == '__main__':

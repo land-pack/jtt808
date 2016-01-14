@@ -46,6 +46,17 @@ def is_complete(val, std):
         return False
 
 
+def field_langth(val):
+    """
+    Sometime,we don't know each field length before we resolute it!
+    So,we need to calculate some field and then get the exactly length!
+    That's why we need this function!
+    :param val:
+    :return: Integer value
+    """
+    return int(val[0])
+
+
 def dec2hex4tuple(val):
     """
     :rtype: object
