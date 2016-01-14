@@ -15,6 +15,22 @@ def display_color(color_name='red'):
     return _display_color
 
 
+def display_color_two(color_name='red'):
+    color = {'red': '31', 'blue': '34', 'yellow': '33', 'cyan': '36'}
+
+    def _display_color(function_name):
+        def __display_color(arg1, arg2):
+            print '\033[1;%s;40m' % color[color_name]
+            print '*' * 80
+            function_name(arg1, arg2)
+            print '*' * 80
+            print '\033[0m'
+
+        return __display_color
+
+    return _display_color
+
+
 @display_color('red')
 def error(val):
     print '[Error]\t', val

@@ -4,18 +4,22 @@ and it's will get a input windows!
 ask you input some command!
 """
 from conf.rest import SOCKET_DESCRIPTOR
-from visual.visual_decorator import display_color
+from visual.visual_decorator import display_color_two
 from app.urls import urlpatterns
 from app import views
 
 
+@display_color_two
 def hello(a, b):
     print ''
-    print '------------------------------------'
+    print '=' * 80
     print '[1] Checking the terminal information'
     print '[2] Checking the terminal attribute'
     print '[3] Do something else!'
+    print '-' * 80
     print '[0] Reset!'
+    print '=' * 80
+    print '-'
     cmd = raw_input('Please input cmd your :')
     if int(cmd) == 1:
         urlpatterns['position'] = views.get_ter_info
