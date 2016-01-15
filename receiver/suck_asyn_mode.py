@@ -12,7 +12,7 @@ from process_signal.payload import hello
 
 class Adapt:
     """
-    Just for make it's adapt suck.py & conn.sendall()
+    Just for make it's adapt suck_block_mode.py & conn.sendall()
     """
 
     def __init__(self, send_desc):
